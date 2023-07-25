@@ -1,5 +1,6 @@
 import verifiedIcon from "./Assets/verified.png";
 import homeIcon from "./Assets/home.png";
+import dp from "./Assets/dp.jpg";
 import profilePic from "./Assets/omar.jpg";
 import styles from "./App.module.css";
 
@@ -19,7 +20,7 @@ function App() {
           <div className={`${styles["nav-link"]} row`}>
             <div className={styles["nav-icon"]}>
               <span
-                class="material-symbols-outlined center"
+                className="material-symbols-outlined center"
                 style={{ fontSize: "30px" }}
               >
                 cottage
@@ -32,7 +33,7 @@ function App() {
           <div className={`${styles["nav-link"]} row`}>
             <div className={styles["nav-icon"]}>
               <span
-                class="material-symbols-outlined center"
+                className="material-symbols-outlined center"
                 style={{ fontSize: "30px" }}
               >
                 search
@@ -45,7 +46,7 @@ function App() {
           <div className={`${styles["nav-link"]} row`}>
             <div className={styles["nav-icon"]}>
               <span
-                class="material-symbols-outlined center"
+                className="material-symbols-outlined center"
                 style={{ fontSize: "30px" }}
               >
                 notifications
@@ -58,7 +59,7 @@ function App() {
           <div className={`${styles["nav-link"]} row`}>
             <div className={styles["nav-icon"]}>
               <span
-                class="material-symbols-outlined center"
+                className="material-symbols-outlined center"
                 style={{ fontSize: "30px" }}
               >
                 mail
@@ -71,7 +72,7 @@ function App() {
           <div className={`${styles["nav-link"]} row`}>
             <div className={styles["nav-icon"]}>
               <span
-                class="material-symbols-outlined center"
+                className="material-symbols-outlined center"
                 style={{ fontSize: "30px" }}
               >
                 description
@@ -84,7 +85,7 @@ function App() {
           <div className={`${styles["nav-link"]} row`}>
             <div className={styles["nav-icon"]}>
               <span
-                class="material-symbols-outlined center"
+                className="material-symbols-outlined center"
                 style={{ fontSize: "30px" }}
               >
                 bookmark
@@ -97,7 +98,7 @@ function App() {
           <div className={`${styles["nav-link"]} row`}>
             <div className={styles["nav-icon"]}>
               <span
-                class="material-symbols-outlined center"
+                className="material-symbols-outlined center"
                 style={{ fontSize: "30px" }}
               >
                 group
@@ -110,7 +111,7 @@ function App() {
           <div className={`${styles["nav-link"]} row`}>
             <div className={styles["nav-icon"]}>
               <span
-                class="material-symbols-outlined center"
+                className="material-symbols-outlined center"
                 style={{ fontSize: "30px" }}
               >
                 verified
@@ -123,7 +124,7 @@ function App() {
           <div className={`${styles["nav-link"]} row`}>
             <div className={styles["nav-icon"]}>
               <span
-                class="material-symbols-outlined center"
+                className="material-symbols-outlined center"
                 style={{ fontSize: "30px" }}
               >
                 person
@@ -136,7 +137,7 @@ function App() {
           <div className={`${styles["nav-link"]} row`}>
             <div className={styles["nav-icon"]}>
               <span
-                class="material-symbols-outlined center"
+                className="material-symbols-outlined center"
                 style={{ fontSize: "30px" }}
               >
                 more_horiz
@@ -155,22 +156,45 @@ function App() {
         <div className={styles["content-section"]}>
           <div className={styles["top-home"]}></div>
           <div className={`${styles["post-tweet"]} row`}>
-            <div className={styles["tweeter-dp"]}></div>
+            <div className={styles["tweeter-dp"]}>
+              <div
+                className={styles["tweet-pic"]}
+                style={{ backgroundImage: `url(${dp})` }}
+              ></div>
+            </div>
             <div className={styles["tweet-section"]}>
               <div className={styles["tweet-input-field"]}>
                 <form className="center">
-                  <input className={styles['tweet-input']} type="text" placeholder="What is happening?!" />
+                  <input
+                    className={styles["tweet-input"]}
+                    type="text"
+                    placeholder="What is happening?!"
+                  />
                 </form>
               </div>
               <div className={`${styles["tweet-actions"]} row`}>
                 <div className={styles["tweets-btns"]}>
                   <div className={`${styles["hold-tweet-btns"]} center row`}>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                    <span className={styles["tweet-ico"]}>
+                      <ion-icon name="image-outline"></ion-icon>
+                    </span>
+                    <span className={styles["tweet-ico"]}>
+                      <span className="material-symbols-outlined center">gif_box</span>
+                    </span>
+                    <span className={styles["tweet-ico"]}>
+                      <ion-icon name="list-outline"></ion-icon>
+                    </span>
+                    <span className={styles["tweet-ico"]}>
+                      <ion-icon name="happy-outline"></ion-icon>
+                    </span>
+                    <span className={styles["tweet-ico"]}>
+                      <span className="material-symbols-outlined center">
+                        pending_actions
+                      </span>
+                    </span>
+                    <span className={styles["tweet-ico"]}>
+                      <ion-icon name="location-outline"></ion-icon>
+                    </span>
                   </div>
                 </div>
                 <div className={styles["centered-space"]}></div>
@@ -260,7 +284,7 @@ function App() {
               <div className={`${styles["hold-search"]} row`}>
                 <span className={styles["search-icon"]}>
                   <span
-                    class="material-symbols-outlined center"
+                    className="material-symbols-outlined center"
                     style={{ fontSize: "20px" }}
                   >
                     search
@@ -299,7 +323,7 @@ function App() {
                 </div>
                 <div className={styles["trends-menu"]}>
                   <span
-                    class="material-symbols-outlined center"
+                    className="material-symbols-outlined center"
                     style={{
                       fontSize: "20px",
                       fontWeight: "bold",
@@ -321,7 +345,7 @@ function App() {
                 </div>
                 <div className={styles["trends-menu"]}>
                   <span
-                    class="material-symbols-outlined center"
+                    className="material-symbols-outlined center"
                     style={{
                       fontSize: "20px",
                       fontWeight: "bold",
@@ -343,7 +367,7 @@ function App() {
                 </div>
                 <div className={styles["trends-menu"]}>
                   <span
-                    class="material-symbols-outlined center"
+                    className="material-symbols-outlined center"
                     style={{
                       fontSize: "20px",
                       fontWeight: "bold",
@@ -365,7 +389,7 @@ function App() {
                 </div>
                 <div className={styles["trends-menu"]}>
                   <span
-                    class="material-symbols-outlined center"
+                    className="material-symbols-outlined center"
                     style={{
                       fontSize: "20px",
                       fontWeight: "bold",
@@ -387,7 +411,7 @@ function App() {
                 </div>
                 <div className={styles["trends-menu"]}>
                   <span
-                    class="material-symbols-outlined center"
+                    className="material-symbols-outlined center"
                     style={{
                       fontSize: "20px",
                       fontWeight: "bold",
@@ -409,7 +433,7 @@ function App() {
                 </div>
                 <div className={styles["trends-menu"]}>
                   <span
-                    class="material-symbols-outlined center"
+                    className="material-symbols-outlined center"
                     style={{
                       fontSize: "20px",
                       fontWeight: "bold",
