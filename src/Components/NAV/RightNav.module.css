@@ -69,7 +69,7 @@
   background-color: var(--offblack);
   border-radius: 25px;
   position: relative;
-  font-family: "Raleway", sans-serif;
+  font-family: "Geologica", sans-serif;
 }
 
 .verified-info {
@@ -113,6 +113,7 @@
 }
 
 .trends-title {
+  font-family: "Geologica", sans-serif;
   padding: 10px 0;
   padding-left: 20px;
   margin-bottom: 10px;
@@ -137,12 +138,10 @@
 }
 
 .follow-title {
+  font-family: 'Geologica', sans-serif;
   padding: 20px;
   font-size: 21px;
   font-weight: bold;
 }
-
-
-
 
 /* right section */

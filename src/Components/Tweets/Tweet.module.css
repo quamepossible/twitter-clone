@@ -1,0 +1,125 @@
+
+.tweets {
+    width: 600px;
+    height: auto;
+    margin: auto;
+    padding-top: 10px;
+    font-family: "Work Sans", sans-serif;
+    border-bottom: 1px solid var(--bordergray);
+  }
+  
+  .author-photo {
+    width: 70px;
+    height: auto;
+    /* background-color: pink; */
+  }
+  
+  .author-dp {
+    width: 45px;
+    border-radius: 50%;
+    display: block;
+    margin: auto;
+    margin-top: 5px;
+  }
+  
+  .tweet-content {
+    width: 530px;
+    height: 100%;
+    font-family: "Raleway", sans-serif;
+  }
+  
+  .author-name {
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 2px;
+    position: relative;
+    /* background-color: blue; */
+  }
+
+  
+  .profile-name {
+    font-family: 'Geologica', sans-serif;
+  }
+  
+  .user-name {
+    padding-left: 3px;
+    color: var(--graytext)
+  }
+
+  .dot{
+    display: inline-block;
+    margin-right: 5px;
+    /* background-color: blue; */
+    position: relative;
+    padding: 5px;
+    font-family: 'Geologica', sans-serif;
+    color: var(--graytext);
+
+  }
+
+  .date-tweeted{
+    color: var(--graytext);
+  }
+  
+  .author-caption {
+    width: 100%;
+    height: auto;
+    line-height: 1.4;
+    font-size: 15px;
+    font-family: "Work Sans", sans-serif;
+    /* border: 1px solid white; */
+  }
+  
+  .tweet-media {
+    width: 80%;
+    height: 460px;
+    margin-top: 15px;
+    border-radius: 20px;
+    border: 1px solid var(--bordergray);
+    overflow: hidden;
+  }
+  
+  .tweet-insight {
+    width: 530px;
+    height: 40px;
+    /* margin: auto; */
+    margin-top: 5px;
+    /* background-color: green; */
+  }
+  
+  .action-span {
+    width: 20%;
+    position: relative;
+    cursor: pointer;
+    color: rgb(88, 88, 88);
+    transition: 0.2s;
+  }
+  
+  .action-span:hover {
+    color: var(--twitterblue);
+  }
+  
+  .action-icon,
+  .action-fig {
+    font-weight: bold;
+    display: inline-block;
+    position: relative;
+  }
+  
+  .action-icon {
+    width: 30px;
+  }
+  
+  ion-icon {
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .action-fig {
+    width: 40px;
+    font-size: 13px;
+  }
+  

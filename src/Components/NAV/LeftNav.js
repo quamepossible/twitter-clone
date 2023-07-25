@@ -15,8 +15,8 @@ const LeftNav = () => {
           />
         </div>
         {
-          navData.map(link => (
-            <div className={`${styles["nav-link"]} row`}>
+          navData.map((link,i) => (
+            <div className={`${styles["nav-link"]} row`} key={i}>
               <div className={styles["nav-icon"]}>
                 <span className="material-symbols-outlined center" style={{ fontSize: "30px" }}>{link[1]}</span>
               </div>
