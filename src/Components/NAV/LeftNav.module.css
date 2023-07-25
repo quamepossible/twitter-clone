@@ -1,0 +1,80 @@
+
+/* left section */
+
+
+.left-section{
+  width: 300px;
+  height: 100%;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  /* background-color: red; */
+}
+
+
+.home-nav{
+    width: 80%;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    /* background-color: blue; */
+  }
+  
+  .home-icon{
+    width: 35px;
+  }
+  
+  
+  .nav-link{
+    width: 80%;
+    /* height: 50px; */
+    /* overflow: hidden; */
+    margin: auto;
+    margin-bottom: 1px;
+    /* background-color: blue; */
+    position: relative;
+  }
+  
+  .nav-icon{
+    width: 50px;
+    position: relative;
+    /* border: 1px solid black; */
+  }
+  
+  .nav-icon span{
+    /* background-color: var(--offblack); */
+    padding: 12px 10px;
+    border-top-left-radius: 40px;
+    border-bottom-left-radius: 40px;
+  }
+  
+  .nav-desc{
+    width: 160px;
+    padding: 12px 30px 12px 0;
+    font-size: 21px;
+    margin-left: -1px;
+    z-index: 5;
+    /* background-color: red; */
+  }
+  
+  .nav-desc span{
+    padding: 12px 30px 12px 10px;
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
+    /* background-color: var(--offblack); */
+  }
+  
+  .tweet-now{
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    width: 80%;
+    /* margin-left: 10px; */
+    margin: auto;
+    margin-top: 5px;
+    padding: 15px 0;
+    border-radius: 100px;
+    background-color: var(--twitterblue);
+  }
+  /* left section */

@@ -1,0 +1,34 @@
+.banner-hold {
+    width: 350px;
+    height: auto;
+  }
+  
+  .banner-hold:hover {
+    background-color: #292d31c9;
+    transition: 0.1s;
+  }
+
+  .trends-data {
+    width: 300px;
+    padding: 10px 20px;
+    line-height: 1.5;
+  }
+  
+  .trends-menu {
+    width: 50px;
+    position: relative;
+  }
+
+.trend-sub-title {
+    font-size: 14px;
+    color: #71767b;
+  }
+  
+  .trend-main-title {
+    font-size: 16px;
+  }
+  
+  .trend-data {
+    font-size: 14px;
+    color: #71767b;
+  }
