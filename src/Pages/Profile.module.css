@@ -1,0 +1,145 @@
+.profile-section {
+  width: 600px;
+  height: 1400px;
+  border: 1px solid var(--bordergray);
+  font-family: "Work Sans", sans-serif;
+}
+
+.profile-header{
+  width: 100%;
+  height: 470px;
+}
+
+.header-nav{
+  width: 100%;
+  height: 50px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.541);
+  overflow: hidden;
+}
+
+.back-icon{
+  width: 50px;
+  margin-right: 20px;
+  position: relative;
+}
+
+.back-symbol{
+  transition: 0.2s;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.back-symbol:hover{
+  background-color: var(--bordergray);
+  border-radius: 50%;
+}
+
+.about{
+  width: 100px;
+  position: relative;
+}
+
+
+.about-name{
+  font-size: 20px;
+  font-weight: bold;
+  padding: 1px;
+}
+
+.tweets-num{
+  position: absolute;
+  bottom: 5px;
+  font-size: 14px;
+  color: var(--graytext)
+}
+
+.hold-header-content{
+  position: relative;
+}
+
+.cover-photo, .profile-data{
+  height: 210px;
+}
+
+.cover-photo, .profile-photo{
+  background-position: center;
+  background-size: cover;
+}
+
+.profile-photo{
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  left:15%;
+  transform: translate(-50%, -50%);
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 4px solid black;
+  background-color: yellow;
+}
+
+.edit-profile{
+  text-align: right;
+  padding: 15px;
+}
+
+.edit-profile span{
+  padding: 5px 15px;
+  border-radius: 40px;
+  border: 1px solid white;
+}
+
+.hold-profile-data{
+  margin-top: 40px;
+  padding-left: 20px;
+}
+
+.profile-name{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.user-name, .calendar-div, .location-div, .audience{
+  color: var(--graytext);
+  font-family: "Raleway", sans-serif;
+}
+
+.user-name{
+  font-size: 15px;
+}
+
+.bio{
+  margin-top: 15px;
+}
+
+.location-div, .calendar-div{
+  width: auto;
+  margin-right: 20px;
+  font-size: 15px;
+}
+
+.location-icon, .calendar-icon{
+  width: 20px;
+  margin-right: 5px;
+  position: relative;
+}
+
+.audience{
+  margin-top: 10px;
+  font-size: 15px;
+}
+
+.audience span{
+  display: inline-block;
+  width: auto;
+  margin-right: 10px;
+}
+
+.fol-num{
+  color: white;
+  font-weight: bold;
+}

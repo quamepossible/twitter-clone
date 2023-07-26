@@ -2,7 +2,7 @@
 .content-section {
   width: 600px;
   height: 100%;
-  border: 1px solid rgb(58, 58, 58);
+  border: 1px solid var(--bordergray);
 }
 
 .top-home {

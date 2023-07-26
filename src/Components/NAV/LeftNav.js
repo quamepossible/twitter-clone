@@ -1,11 +1,15 @@
-import {useState} from 'react';
-
+import { useState } from 'react';
+import { NavLink } from "react-router-dom";
 import styles from "./LeftNav.module.css";
 import homeIcon from "../../Assets/home.png";
 
 const LeftNav = () => {
+  const activeLink = ({isActive}) => {
+    const fullClassName = [styles['nav-link'], styles['active']];
+    return isActive ? `${fullClassName.join(' ')} row` : `${styles["nav-link"]} row`
+  }
 
-  const navData = [["Home", "cottage", "/"], ["Explore", "search", "/"], ["Notifications", "notifications", "/"], ["Messages", "mail", "/"], ["Lists", "description", "/"], ["Bookmarks", "bookmark", "/"], ["Communities", "group", "/"], ["Verified", "verified", "/"], ["Profile", "person", "/"], ["More", "more_horiz", "/"]];
+  const navData = [["Home", "cottage", "/"], ["Explore", "search", "/explore"], ["Notifications", "notifications", "/notifications"], ["Messages", "mail", "/messages"], ["Lists", "description", "/lists"], ["Bookmarks", "bookmark", "/bookmarks"], ["Communities", "group", "/communities"], ["Verified", "verified", "/verified-choose"], ["Profile", "person", "/profile"], ["More", "more_horiz", "/more"]];
   return (
     <>
       {/* LEFT SECTION */}
@@ -18,14 +22,14 @@ const LeftNav = () => {
           />
         </div>
         {
-          navData.map((link,i) => (
-            <div id='nav-row' className={`${styles["nav-link"]} row`} key={i}>
+          navData.map((link,i) => {
+            return (<NavLink className={activeLink} to={link[2]} key={i}>
               <div className={`${styles["nav-icon"]} icons`}>
                 <span className={`${styles['nav-icon-symbols']} material-symbols-outlined center`}>{link[1]}</span>
               </div>
               <div className={`${styles["nav-desc"]}`}><span>{link[0]}</span></div>
-            </div>
-          ))
+            </NavLink>)
+          })
         }
         <div className={styles["tweet-now"]}>Tweet</div>
       </div>

@@ -1,6 +1,8 @@
 
 /* left section */
-
+a{
+  color: white;
+}
 
 .left-section{
   width: 300px;
@@ -39,6 +41,11 @@
 
   .nav-link:hover span{
     background-color: var(--offblack);
+  }
+
+ .active{
+    color: red;
+    font-weight: bold;
   }
   
   .nav-icon{
