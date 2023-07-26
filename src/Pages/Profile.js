@@ -1,3 +1,5 @@
+import { Outlet, NavLink } from 'react-router-dom';
+
 import styles from './Profile.module.css';
 import coverImg from '../Assets/cover.jpeg';
 import dpImg from '../Assets/profilepic.jpg';
@@ -52,10 +54,20 @@ const Profile = () => {
                                 <span className={styles['followers']}><span className={styles['fol-num']}>42</span>Followers</span>
                             </div>
                         </div>
+
+                        <div className={`${styles['profile-nav']} row`}>
+                            <NavLink to="" className={styles['each-nav']}>Tweets</NavLink>
+                            <NavLink to="replies" className={styles['each-nav']}>Replies</NavLink>
+                            <NavLink to="highlights" className={styles['each-nav']}>Highlights</NavLink>
+                            <NavLink to="media" className={styles['each-nav']}>Media</NavLink>
+                            <NavLink to="likes" className={styles['each-nav']}>Likes</NavLink>
+                        </div>
                     </div>
+                    
                 </div>
             </div>
-        </div>
+            <Outlet />
+        </div>     
         </>
     )
 }

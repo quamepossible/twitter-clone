@@ -1,6 +1,6 @@
 .profile-section {
   width: 600px;
-  height: 1400px;
+  height: auto;
   border: 1px solid var(--bordergray);
   font-family: "Work Sans", sans-serif;
 }
@@ -8,6 +8,8 @@
 .profile-header{
   width: 100%;
   height: 470px;
+  border-bottom: 1px solid var(--bordergray);
+  /* background-color: red; */
 }
 
 .header-nav{
@@ -38,7 +40,7 @@
 }
 
 .about{
-  width: 100px;
+  width: auto;
   position: relative;
 }
 
@@ -79,7 +81,6 @@
   height: 140px;
   border-radius: 50%;
   border: 4px solid black;
-  background-color: yellow;
 }
 
 .edit-profile{
@@ -142,4 +143,19 @@
 .fol-num{
   color: white;
   font-weight: bold;
+}
+
+.profile-nav{
+  width: 100%;
+  margin-top: 11px;
+}
+
+.each-nav{
+  padding: 20px 31.5px;
+  margin: auto;
+  transition: 0.2s;
+}
+
+.each-nav:hover{
+  background-color: rgb(19, 19, 19);
 }

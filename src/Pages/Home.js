@@ -3,11 +3,8 @@ import dp from "../Assets/dp.jpg";
 import Tweet from '../Components/Tweets/Tweet';
 
 
-const Home = () => {
-  const tweetPostData = [
-    ['Kwame Opoku - Appiah', 'quame_mission', 'Hello world this is just a dummy text.', {comments: '350', retweets: '200', likes: '430', views: '980', datePosted: 'Jul 25'}],
-    ['Kwame Opoku - Appiah', 'quame_mission', 'Hello world this is just a dummy text.', {comments: '350', retweets: '200', likes: '430', views: '980', datePosted: 'Jul 25'}],
-  ]
+const Home = ({tweetPostData}) => {
+ 
     return (
         <>
         {/* CENTER CONTENT */}
