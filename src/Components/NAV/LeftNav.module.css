@@ -13,12 +13,11 @@
 
 
 .home-nav{
-    width: 80%;
+    width: 85%;
     margin: auto;
     margin-top: 10px;
     margin-bottom: 10px;
     padding-left: 10px;
-    /* background-color: blue; */
   }
   
   .home-icon{
@@ -27,13 +26,19 @@
   
   
   .nav-link{
-    width: 80%;
+    width: 85%;
     /* height: 50px; */
-    /* overflow: hidden; */
+    overflow: hidden;
+    /* margin-left: 17%; */
     margin: auto;
     margin-bottom: 1px;
     /* background-color: blue; */
     position: relative;
+    cursor: pointer;
+  }
+
+  .nav-link:hover span{
+    background-color: var(--offblack);
   }
   
   .nav-icon{
@@ -41,12 +46,18 @@
     position: relative;
     /* border: 1px solid black; */
   }
+
+  .nav-icon-symbols{
+    font-size: 30px;
+  }
   
   .nav-icon span{
     /* background-color: var(--offblack); */
     padding: 12px 10px;
     border-top-left-radius: 40px;
     border-bottom-left-radius: 40px;
+    /* background-color: black; */
+    transition: 0.2s;
   }
   
   .nav-desc{
@@ -62,6 +73,9 @@
     padding: 12px 30px 12px 10px;
     border-top-right-radius: 40px;
     border-bottom-right-radius: 40px;
+    /* background-color: black; */
+    transition: 0.2s;
+
     /* background-color: var(--offblack); */
   }
   
