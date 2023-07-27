@@ -3,7 +3,10 @@
 .right-section {
   width: 400px;
   height: 100%;
-  height: auto;
+  /* top: 58px; */
+  /* position: relative; */
+  /* bottom: -200px;
+  background-color: red; */
 }
 
 .right-search {
@@ -118,7 +121,7 @@
   padding-left: 20px;
   margin-bottom: 10px;
   font-size: 22px;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .banner-content {

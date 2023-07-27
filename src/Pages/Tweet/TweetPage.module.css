@@ -1,0 +1,252 @@
+.tweet-content {
+  width: 100%;
+  height: 1300px;
+  font-family: "Raleway", sans-serif;
+  font-family: "Geologica", sans-serif;
+
+
+  /* background-color: red; */
+}
+
+.tweet-nav {
+  width: 100%;
+  height: 50px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.541);
+  overflow: hidden;
+  font-family: "Geologica", sans-serif;
+}
+
+.back-icon {
+  width: 50px;
+  margin-right: 20px;
+  position: relative;
+}
+
+.back-symbol {
+  transition: 0.2s;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.back-symbol:hover {
+  background-color: var(--bordergray);
+  border-radius: 50%;
+}
+
+.about {
+  width: 60px;
+  /* background-color: red; */
+  position: relative;
+}
+
+.about-name {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 1px;
+}
+
+.author-details {
+  height: 70px;
+  /* background-color: green; */
+  overflow: hidden;
+}
+
+.author-photo{
+    width: 12%;
+    overflow: hidden;
+    /* background-color: blue; */
+}
+
+.author-names{
+    width: 77%;
+    margin: auto;
+    /* background-color: red; */
+}
+
+.author-username{
+    color: var(--graytext)
+}
+
+.tweet-menu{
+    width: 10%;;
+}
+
+.tweet-caption {
+  height: auto;
+  color: #e7e9ea;
+  line-height: 24px;
+  font-size: 17px;
+  font-weight: 400;
+  /* background-color: red; */
+}
+
+.tweet-text{
+    padding: 10px 20px;
+}
+
+.tweet-media {
+  height: auto;
+  padding: 10px 0;
+  /* background-color: blue; */
+}
+
+.tweet-main-media{
+    width: 520px;
+    height: 500px;
+    margin: auto;
+    border: 1px solid var(--bordergray)
+}
+
+.tweet-info,
+.tweet-insight,
+.tweet-action {
+  width: 95%;
+  height: 50px;
+  margin: auto;
+  border-bottom: 1px solid var(--bordergray);
+  position: relative;
+  font-family: "Geologica", sans-serif;
+}
+
+.add-tweet-comment {
+  height: 100px;
+  /* background-color: green; */
+}
+
+.comments {
+  height: auto;
+  /* background-color: blue; */
+}
+
+.action-div {
+  width: 20%;
+  position: relative;
+  /* border: 1px solid white; */
+}
+
+.tweet-info p{
+  /* background: blue; */
+  width: 100%;
+  color: var(--graytext)
+}
+
+.hold-dot{
+    position: relative;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    /* background-color: green; */
+}
+
+.dot{
+    display: inline-block;
+    height: 2px;
+    width: 2px;
+    border-radius: 50%;
+    /* background-color: pink; */
+} 
+
+.tweet-insight{
+    /* background-color: blue; */
+}
+
+.hold-insight{
+    width: 100%;
+    /* background-color: red; */
+    margin: auto;
+}
+
+.hold-insight div{
+    margin-right: 20px;
+}
+
+.each-comment {
+  width: 100%;
+  height: auto;
+  /* background-color: black; */
+  padding-bottom: 10px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--bordergray);
+  line-height: 20px;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.comm-aut-pic {
+  width: 70px;
+}
+
+.comm-pic {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  margin: 10px 0 0 10px;
+  background-position: center;
+  background-size: cover;
+}
+
+.comm-data {
+  width: 520px;
+  margin: 0 auto;
+}
+
+.comm-about {
+  width: 100%;
+  height: 25px;
+  margin: 5px 0;
+}
+
+.comm-names,
+.comm-caption {
+  font-size: 15px;
+}
+
+.comm-names {
+  width: 90%;
+  height: auto;
+}
+
+.gray-info {
+  color: var(--graytext);
+}
+
+.comm-menu, .tweet-menu {
+  width: 10%;
+  position: relative;
+}
+
+.comm-caption {
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.comm-actions {
+  width: 100%;
+  height: auto;
+  color: var(--graytext);
+  font-size: 14px;
+}
+
+.each-action {
+  width: 20%;
+}
+
+.action-icon,
+.action-num {
+  width: 20px;
+  height: auto;
+  position: relative;
+}
+
+.action-num {
+  width: 60px;
+  padding: 5px;
+}
+
+.share-comm {
+  width: 20px;
+  margin-left: 65px;
+}

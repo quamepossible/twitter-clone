@@ -5,7 +5,13 @@ import Trends from "./Trends/Trends";
 import Follow from "./Follow/Follow";
 
 const RightNav = () => {
-  const trendsArray = [['Trending in Ghana', 'Snapchat', '9,287'], ['Trending in Ghana', 'Snapchat', '9,287'], ['Trending in Ghana', 'Snapchat', '9,287']];
+  const trendsArray = [
+    ['Trending in Ghana', 'Snapchat', '9,287'], 
+    ['Trending in Ghana', 'Snapchat', '9,287'], 
+    ['Trending in Ghana', 'Snapchat', '9,287'],
+    ['Trending in Ghana', 'Snapchat', '9,287'],
+    ['Trending in Ghana', 'Snapchat', '9,287'],
+  ];
   const followArray = [['Omar Sterling', 'pound_sterlin', 'IMG_SRC', 'ACC_ID']]
   return (
     <>

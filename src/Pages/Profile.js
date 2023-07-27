@@ -10,7 +10,7 @@ const Profile = () => {
         <div className={styles['profile-section']}>
             <div className={`${styles['header-nav']} row`}>
                 <div className={styles['back-icon']}>
-                <span className={`${styles['back-symbol']} material-symbols-outlined center`}>arrow_back</span>
+                    <span className={`${styles['back-symbol']} material-symbols-outlined center`}>arrow_back</span>
                 </div>
                 <div className={styles['about']}>
                     <p className={styles['about-name']}>Young - K</p>
@@ -31,7 +31,7 @@ const Profile = () => {
                             <div className={`${styles['bio']} row`}>
                                 <div className={`${styles['location-div']} row`}>
                                     <div className={styles['location-icon']}>
-                                        <span class="material-symbols-outlined center">location_on</span>
+                                        <span className="material-symbols-outlined center">location_on</span>
                                     </div>
                                     <div className={styles['hold-location']}>
                                         <span className={styles['city']}>Kumasi</span>,
@@ -41,7 +41,7 @@ const Profile = () => {
 
                                 <div className={`${styles['calendar-div']} row`}>
                                     <div className={styles['calendar-icon']}>
-                                        <span class="material-symbols-outlined center">calendar_month</span>
+                                        <span className="material-symbols-outlined center">calendar_month</span>
                                     </div>
                                     <div className={styles['date-section']}>
                                         <span>April 2014</span>                          
