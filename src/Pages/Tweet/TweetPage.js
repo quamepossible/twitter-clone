@@ -1,13 +1,19 @@
+import { useRef } from 'react';
 import { useParams, useLoaderData } from 'react-router-dom';
 
+import useImgDimHook from '../../Hooks/ImageDimHook';
+
 import Posty from '../../Assets/media/posty.jpg';
-import Boogie from '../../Assets/media/boogie.jpg';
+import Boogie from '../../Assets/media/malone.jpg';
 import styles from './TweetPage.module.css';
 
 const TweetPage = () => {
     const tweetData = useLoaderData();
-    console.log(tweetData);
-    const { id, full_name, username, tweet_caption, comments, retweets, likes, views, datePosted, mediaURL, media } = tweetData;
+    const { id, full_name, username, tweet_caption, comments, retweets, likes, views, datePosted, timePosted, mediaURL, media, location } = tweetData;
+    
+    const mediaRef = useRef(null)
+    useImgDimHook(mediaRef, Boogie);
+
     return(
     <div className={styles['tweet-content']}>
         <div className={`${styles['tweet-nav']} row`}>
@@ -23,38 +29,38 @@ const TweetPage = () => {
                 <div style={{backgroundImage: `url(${Posty}`}} className={styles['comm-pic']} />
             </div>
             <div className={styles['author-names']}>
-                <p>Kwame Opoku Appiah</p>
-                <p className={styles['author-username']}>@<span>quame_mission</span></p>
+                <p>{full_name}</p>
+                <p className={styles['author-username']}>@<span>{username}</span></p>
             </div>
             <div className={styles['tweet-menu']}>
                 <ion-icon style={{color: '#71767b'}} name="ellipsis-horizontal"></ion-icon>
             </div>
         </div>
         <div className={styles['tweet-caption']}>
-            <p className={styles['tweet-text']}>This is just a dummy tweet caption. This is just a dummy tweet caption.This is just a dummy tweet caption.This is just a dummy tweet caption.This is just a dummy tweet caption</p>
+            <p className={styles['tweet-text']}>{tweet_caption}</p>
         </div>
-        <div className={styles['tweet-media']}>
-            <div className={styles['tweet-main-media']}></div>
-        </div>
+        {media && <div className={styles['tweet-media']}>
+            <div ref={mediaRef} className={styles['tweet-main-media']} style={{backgroundImage: `url(${Boogie})`}}></div>
+        </div>}
         <div className={styles['tweet-info']}>
             <p className='center'>
-                <span>1:30</span> AM
+                <span>{timePosted}</span>
                 <span className={styles['hold-dot']}>
                     <span className={`${styles['dot']} center`}></span>
                 </span>
-                <span>Jul 27, 2023</span> from
-                <span> Accra, Ghana</span>
+                <span>{datePosted}</span> from
+                <span> {location} </span>
                 <span className={styles['hold-dot']}>
                     <span className={`${styles['dot']} center`}></span>
                 </span>
-                <span style={{color: 'white'}}><b>10,500</b></span> Views
+                <span style={{color: 'white'}}><b>{views}</b></span> Views
             </p>
         </div>
         <div className={styles['tweet-insight']}>
             <div className={`${styles['hold-insight']} center row`}>
-                <div><span><b>48</b></span> Retweets</div>
-                <div><span><b>30</b></span> Quote</div>
-                <div><span><b>9,499</b></span> Likes</div>
+                <div><span><b>{retweets}</b></span> Retweets</div>
+                <div><span><b>0</b></span> Quote</div>
+                <div><span><b>{likes}</b></span> Likes</div>
             </div>
         </div>
         <div className={`${styles['tweet-action']} row`}>
