@@ -18,7 +18,7 @@ import styles from "./App.module.css";
 
 const tweetPostData = [
   {id: '456', full_name: 'Kwame Opoku - Appiah', username: 'quame_mission', tweet_caption: 'Hello world this is just a dummy text.Hello world this is just a dummy text.Hello world this is just a dummy text.Hello world this is just a dummy text.', comments: '350', retweets: '200', likes: '430', views: '980', datePosted: 'Jul 25', mediaURL: 'austin.jpg', media: false},
-  {id: '123',full_name: 'Post Malone', username: 'post_malone', tweet_caption: 'I had a very nice race today.', comments: '350', retweets: '200', likes: '430', views: '980', datePosted: 'Jul 25', mediaURL: 'austin.jpg', media: true},
+  {id: '123', full_name: 'Post Malone', username: 'post_malone', tweet_caption: 'I had a very nice race today.', comments: '350', retweets: '200', likes: '430', views: '980', datePosted: 'Jul 25', timePosted: '2:30 AM', mediaURL: 'austin.jpg', media: true, location: 'Accra, Ghana'},
 ]
 
 function App() {

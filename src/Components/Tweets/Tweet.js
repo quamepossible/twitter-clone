@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { NavLink } from "react-router-dom";
 
 
@@ -6,38 +6,15 @@ import profilePic from "../../Assets/omar.jpg";
 import styles from "./Tweet.module.css";
 import defaultMedia from '../../Assets/media/posty.jpg'
 
+import useImgDimHook from "../../Hooks/ImageDimHook";
+
 const Tweet = ({ tweetData }) => {
-  const mediaRef = useRef(null);
-
-  useEffect(() => {
-    const imageDimensionSet = () => {
-      if(mediaRef.current){
-        const image = new Image();
-        image.src = defaultMedia;
-        image.onload = () => {
-          const imageWidth = +image.width;
-          const imageHeight = +image.height;
-
-          let desiredWidth = imageWidth;
-          let desiredHeight = imageHeight;
-
-          if(imageWidth > 520){
-            const excessWidth = imageWidth - 520;
-            const excessPerc = Math.round((excessWidth / imageWidth) * 100);
-
-            desiredWidth = 520;
-            desiredHeight = Math.round(((100 - excessPerc) / 100) * imageHeight);
-          } 
-          mediaRef.current.style.width = `${desiredWidth}px`;
-          mediaRef.current.style.height = `${desiredHeight}px`;
-        }
-      }
-
-    }
-    imageDimensionSet()
-  }, [])
   const {full_name, username, tweet_caption, id, comments, retweets, likes, views, datePosted, media, mediaURL } = tweetData;
-  const tweetMedia = media ? mediaURL : '';
+  // const tweetMedia = media ? mediaURL : '';
+  
+  const mediaRef = useRef(null);
+  useImgDimHook(mediaRef, defaultMedia);
+
   const tweetPath = `/profile/status/${id}`;
   return (
     <NavLink to={tweetPath} className={`${styles["tweets"]} row`}>
