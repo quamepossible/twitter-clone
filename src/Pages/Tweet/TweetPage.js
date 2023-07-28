@@ -102,7 +102,7 @@ const TweetPage = () => {
 
         {/* LOAD COMMENTS */}
         <div className={styles['comments']}>
-            {comments.length > 0 ? comments.map(comment => <Comments key={comment.id} theComment={comment} />) : <p style={{textAlign: 'center', fontSize: '24px', marginTop: '50px'}}>No comments</p>}
+            {comments.length > 0 ? comments.filter(comment => comment.ref_to === id).map(comment => <Comments key={comment.id} theComment={comment} allComments={comments} />) : <p style={{textAlign: 'center', fontSize: '24px', marginTop: '50px'}}>No comments</p>}
         </div>
         {/* LOAD COMMENTS */}
 

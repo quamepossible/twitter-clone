@@ -29,25 +29,24 @@ a{
   
   .nav-link{
     width: 85%;
-    /* height: 50px; */
     overflow: hidden;
-    /* margin-left: 17%; */
     margin: auto;
     margin-bottom: 1px;
-    /* background-color: blue; */
     position: relative;
     cursor: pointer;
+    font-weight: 400;
   }
+
 
   .nav-link:hover span{
     background-color: var(--offblack);
   }
 
  .active{
-    color: red;
-    font-weight: bold;
+    /* color: red; */
+    font-weight: 600;
   }
-  
+
   .nav-icon{
     width: 50px;
     position: relative;

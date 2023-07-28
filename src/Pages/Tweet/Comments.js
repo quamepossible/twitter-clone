@@ -2,69 +2,82 @@ import styles from './Comments.module.css';
 import Posty from '../../Assets/media/posty.jpg';
 
 
-const Comments = ({theComment}) => {
-    const { ref_to, id, full_name, username, tweet_caption, comments, comments_total, retweets, likes, views, datePosted, timePosted, mediaURL, media, location } = theComment;
+
+const CommentActions = ({action}) => {
+    return (
+        <div className={`${styles['each-action']} row`}>
+        <div className={styles['action-icon']}>
+            <ion-icon name={action[1]}></ion-icon>
+        </div>
+        <div className={styles['action-num']}>
+            <span className=''>{action[0]}</span>
+        </div>
+    </div>
+    )
+}
+
+const CommentUI = ({eachComment, bottomLine}) => {
+    const { ref_to, id, full_name, username, tweet_caption, comments, comments_total, retweets, likes, views, datePosted, timePosted, mediaURL, media, location } = eachComment;
+    const commentsActionArr = [[comments_total, 'chatbubbles-outline'], [retweets, 'git-compare-outline'], [likes, 'heart-outline'], [views, 'stats-chart']];
+    
     return (
         <>
-        <div className={`${styles['each-comment']} row`}>
-            <div className={styles['comm-aut-pic']}>
-                <div style={{backgroundImage: `url(${Posty}`}} className={styles['comm-pic']} />
-            </div>
-            <div className={styles['comm-data']}>
-                <div className={`${styles['comm-about']} row`}>
-                    <div className={styles['comm-names']}>
-                        <p><span>{full_name}</span> <span className={styles['gray-info']}>@{username}</span> <span  className={styles['gray-info']}>.</span> <span className={styles['gray-info']}>{datePosted}</span></p>
-                    </div>
-                    <div className={styles['comm-menu']}>
-                        <ion-icon style={{color: '#71767b'}} name="ellipsis-horizontal"></ion-icon>
-                    </div>
-                </div>
-                <div className={styles['comm-caption']}>
-                    <p>{tweet_caption}</p>
-                </div>
-                <div className={`${styles['comm-actions']} row`}>
-                    <div className={`${styles['each-action']} row`}>
-                        <div className={styles['action-icon']}>
-                            <ion-icon name="chatbubbles-outline"></ion-icon>
-                        </div>
-                        <div className={styles['action-num']}>
-                            <span className=''>{comments_total}</span>
-                        </div>
+        {/* COMMENT AUTHOR PIC */}
+        <div className={styles['comm-aut-pic']}>
+            <div style={{backgroundImage: `url(${Posty}`}} className={styles['comm-pic']} />
+        </div>
+        {/* COMMENT AUTHOR PIC */}
 
-                    </div>
-                    <div className={`${styles['each-action']} row`}>
-                        <div className={styles['action-icon']}>
-                            <ion-icon name="git-compare-outline"></ion-icon>
-                        </div>
-                        <div className={styles['action-num']}>
-                            <span className=''>{retweets}</span>
-                        </div>                        
-                    </div>
-                    <div className={`${styles['each-action']} row`}>
-                        <div className={styles['action-icon']}>
-                            <ion-icon name="heart-outline"></ion-icon>
-                        </div>
-                        <div className={styles['action-num']}>
-                            <span className=''>{likes}</span>
-                        </div>                        
-                    </div>
-                    <div className={`${styles['each-action']} row`}>
-                        <div className={styles['action-icon']}>
-                            <ion-icon name="stats-chart"></ion-icon>
-                        </div>
-                        <div className={styles['action-num']}>
-                            <span className=''>{views}</span>
-                        </div>                        
-                    </div>
-                    <div className={`${styles['share-comm']} row`}>
-                        <div className={styles['action-icon']}>
-                            <ion-icon name="share-outline"></ion-icon>
-                        </div>
+        <div className={styles['comm-data']}>
+            {/* COMMENT AUTHOR INFO */}
+            <div className={`${styles['comm-about']} row`}>
+                <div className={styles['comm-names']}>
+                    <p><span>{full_name}</span> <span className={styles['gray-info']}>@{username}</span> <span  className={styles['gray-info']}>.</span> <span className={styles['gray-info']}>{datePosted}</span></p>
+                </div>
+
+                {/* COMMENT MENU ICON */}
+                <div className={styles['comm-menu']}>
+                    <ion-icon style={{color: '#71767b'}} name="ellipsis-horizontal"></ion-icon>
+                </div>
+                {/* COMMENT MENU ICON */}
+            </div>
+            {/* COMMENT AUTHOR INFO */}
+
+            {/* COMMENT TEXT */}
+            <div className={styles['comm-caption']}>
+                <p>{tweet_caption}</p>
+            </div>
+            {/* COMMENT TEXT */}
+
+
+            {/* COMMENT ACTIONS */}
+            <div className={`${styles['comm-actions']} row`}>
+                {/* COMMENT INSIGHTS */}
+                {commentsActionArr.map(action => <CommentActions key={action[1]} action={action} />)}       
+                {/* COMMENT INSIGHTS */}
+
+                {/* SHARE COMMENT */}
+                <div className={`${styles['share-comm']} row`}>
+                    <div className={styles['action-icon']}>
+                        <ion-icon name="share-outline"></ion-icon>
                     </div>
                 </div>
+                {/* SHARE COMMENT */}
             </div>
+            {/* COMMENT ACTIONS */}
+
         </div>
         </>
+    )
+}
+
+const Comments = ({theComment, allComments}) => {
+    const subComments = allComments.filter(comment => comment.ref_to === theComment.id)
+    return (
+        <div className={`${styles['each-comment']} row`}>
+            <CommentUI eachComment={theComment} />
+            {subComments.length > 0 && subComments.map(subComm => <CommentUI key={subComm.id} eachComment={subComm} />)}
+        </div>
     )
 }
 
