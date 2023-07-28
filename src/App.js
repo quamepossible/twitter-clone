@@ -25,7 +25,7 @@ const tweetPostData = [
     full_name: "Kwame Opoku - Appiah",
     username: "quame_mission",
     tweet_caption:
-      "Hello world this is just a dummy text.Hello world this is just a dummy text.Hello world this is just a dummy text.Hello world this is just a dummy text.",
+      "Hello world, welcome to my Twitter clone. It doesn't look great, but I'm trying to work that out.",
     comments_total: "350",
     retweets: "200",
     likes: "430",
@@ -106,7 +106,7 @@ const tweetPostData = [
     id: "123",
     full_name: "Post Malone",
     username: "post_malone",
-    tweet_caption: "I had a very nice race today.",
+    tweet_caption: "And, oh!... You can't do all the cool stuffs for now. I'm still building the interface and I'm hoping to give you a wonderful UX very soon 😔",
     comments_total: "350",
     comments: [],
     retweets: "40",
