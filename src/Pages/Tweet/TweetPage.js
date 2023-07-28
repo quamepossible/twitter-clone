@@ -5,11 +5,13 @@ import useImgDimHook from '../../Hooks/ImageDimHook';
 
 import Posty from '../../Assets/media/posty.jpg';
 import Boogie from '../../Assets/media/malone.jpg';
+
+import Comments from './Comments';
 import styles from './TweetPage.module.css';
 
 const TweetPage = () => {
     const tweetData = useLoaderData();
-    const { id, full_name, username, tweet_caption, comments, retweets, likes, views, datePosted, timePosted, mediaURL, media, location } = tweetData;
+    const { id, full_name, username, tweet_caption, comments, comments_total, retweets, likes, views, datePosted, timePosted, mediaURL, media, location } = tweetData;
     
     const mediaRef = useRef(null)
     useImgDimHook(mediaRef, Boogie);
@@ -80,68 +82,30 @@ const TweetPage = () => {
               <ion-icon style={{fontSize: '25px'}} name="share-outline"></ion-icon>
             </div>
         </div>
-        <div className={styles['add-tweet-comment']}></div>
-        <div className={styles['comments']}>
-            <div className={`${styles['each-comment']} row`}>
-                <div className={styles['comm-aut-pic']}>
-                    <div style={{backgroundImage: `url(${Posty}`}} className={styles['comm-pic']} />
-                </div>
-                <div className={styles['comm-data']}>
-                    <div className={`${styles['comm-about']} row`}>
-                        <div className={styles['comm-names']}>
-                            <p><span>Papa Essel Silas</span> <span className={styles['gray-info']}>@P_E_S</span> <span  className={styles['gray-info']}>.</span> <span className={styles['gray-info']}>Jul 27</span></p>
-                        </div>
-                        <div className={styles['comm-menu']}>
-                            <ion-icon style={{color: '#71767b'}} name="ellipsis-horizontal"></ion-icon>
-                        </div>
-                    </div>
-                    <div className={styles['comm-caption']}>
-                        <p>This is a dummy comment</p>
-                    </div>
-                    <div className={`${styles['comm-actions']} row`}>
-                        <div className={`${styles['each-action']} row`}>
-                            <div className={styles['action-icon']}>
-                                <ion-icon name="chatbubbles-outline"></ion-icon>
-                            </div>
-                            <div className={styles['action-num']}>
-                                <span className=''>900</span>
-                            </div>
 
-                        </div>
-                        <div className={`${styles['each-action']} row`}>
-                            <div className={styles['action-icon']}>
-                                <ion-icon name="git-compare-outline"></ion-icon>
-                            </div>
-                            <div className={styles['action-num']}>
-                                <span className=''>900</span>
-                            </div>                        
-                        </div>
-                        <div className={`${styles['each-action']} row`}>
-                            <div className={styles['action-icon']}>
-                                <ion-icon name="heart-outline"></ion-icon>
-                            </div>
-                            <div className={styles['action-num']}>
-                                <span className=''>900</span>
-                            </div>                        
-                        </div>
-                        <div className={`${styles['each-action']} row`}>
-                            <div className={styles['action-icon']}>
-                                <ion-icon name="stats-chart"></ion-icon>
-                            </div>
-                            <div className={styles['action-num']}>
-                                <span className=''>900</span>
-                            </div>                        
-                        </div>
-                        <div className={`${styles['share-comm']} row`}>
-                            <div className={styles['action-icon']}>
-                                <ion-icon name="share-outline"></ion-icon>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        {/* ADD COMMENT TO TWEET */}
+        <div className={`${styles['add-tweet-comment']} row`}>
+            <div className={styles['composer-pic']}>
+                <div className={`${styles['add-com-pic']} center`} style={{backgroundImage: `url(${Boogie})`}}></div>
             </div>
-
+            <div className={styles['composer-form']}>
+                <form className='center'>
+                    <input type='text' className={styles['comm-input']} placeholder='Tweet your reply!' />
+                </form>
+            </div>
+            <div className={styles['reply-btn']}>
+                <button type='button' className={`${styles['submit-btn']} center pending-button`}>Reply</button>
+            </div>
         </div>
+        {/* ADD COMMENT TO TWEET */}
+
+
+        {/* LOAD COMMENTS */}
+        <div className={styles['comments']}>
+            {comments.length > 0 ? comments.map(comment => <Comments key={comment.id} theComment={comment} />) : <p style={{textAlign: 'center', fontSize: '24px', marginTop: '50px'}}>No comments</p>}
+        </div>
+        {/* LOAD COMMENTS */}
+
     </div>
     )
 }

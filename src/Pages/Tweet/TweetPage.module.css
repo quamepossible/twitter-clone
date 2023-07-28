@@ -1,11 +1,7 @@
 .tweet-content {
   width: 100%;
-  height: 1300px;
-  /* font-family: "Raleway", sans-serif; */
+  height: auto;
   font-family: "Geologica", sans-serif;
-
-
-  /* background-color: red; */
 }
 
 .tweet-nav {
@@ -115,9 +111,57 @@
 }
 
 .add-tweet-comment {
-  height: 100px;
-  /* background-color: green; */
+  height: 80px;
+  width: 100%;
+  border-bottom: 1px solid var(--bordergray);
 }
+
+.composer-pic{
+  width: 12%;
+  position: relative;
+}
+
+.add-com-pic{
+  width: 40px;
+  height: 40px;
+  margin-left: 5px;
+  background-position: center;
+  background-size: cover;
+  border-radius: 50%;
+
+}
+
+.composer-form{
+  width: 70%;
+  position: relative;
+}
+
+.composer-form form{
+  display: block;
+  width: 100%;
+}
+
+.comm-input{
+  width: 100%;
+  padding: 25px 5px;
+  background-color: black;
+  border: none;
+  outline: none !important;
+  color: white;
+  font-size: 21px;
+}
+
+.comm-input::placeholder{
+  font-size: 21px;
+}
+
+.reply-btn{
+  width: 18%;
+  position: relative;
+  /* background-color: red; */
+  height: 80%;
+}
+
 
 .comments {
   height: auto;
@@ -152,10 +196,6 @@
     background-color: var(--graytext);
 } 
 
-.tweet-insight{
-    /* background-color: blue; */
-}
-
 .hold-insight{
     width: 100%;
     /* background-color: red; */
@@ -171,90 +211,11 @@
     color: white;
 }
 
-.each-comment {
-  width: 100%;
-  height: auto;
-  /* background-color: black; */
-  padding-bottom: 10px;
-  overflow: hidden;
-  border-bottom: 1px solid var(--bordergray);
-  line-height: 20px;
-  font-size: 15px;
-  font-weight: 400;
-}
-
-.comm-aut-pic {
-  width: 70px;
-}
-
 .comm-pic {
-  width: 55px;
-  height: 55px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  margin: 10px 0 0 10px;
+  margin: 15px 0 0 20px;
   background-position: center;
   background-size: cover;
-}
-
-.comm-data {
-  width: 520px;
-  margin: 0 auto;
-}
-
-.comm-about {
-  width: 100%;
-  height: 25px;
-  margin: 5px 0;
-}
-
-.comm-names,
-.comm-caption {
-  font-size: 15px;
-}
-
-.comm-names {
-  width: 90%;
-  height: auto;
-}
-
-.gray-info {
-  color: var(--graytext);
-}
-
-.comm-menu, .tweet-menu {
-  width: 10%;
-  position: relative;
-}
-
-.comm-caption {
-  height: auto;
-  margin-bottom: 10px;
-}
-
-.comm-actions {
-  width: 100%;
-  height: auto;
-  color: var(--graytext);
-  font-size: 14px;
-}
-
-.each-action {
-  width: 20%;
-}
-
-.action-icon,
-.action-num {
-  width: 20px;
-  height: auto;
-  position: relative;
-}
-
-.action-num {
-  width: 60px;
-  padding: 5px;
-}
-
-.share-comm {
-  width: 20px;
-  margin-left: 65px;
 }

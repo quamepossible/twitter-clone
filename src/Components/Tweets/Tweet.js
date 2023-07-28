@@ -4,12 +4,12 @@ import { NavLink } from "react-router-dom";
 
 import profilePic from "../../Assets/omar.jpg";
 import styles from "./Tweet.module.css";
-import defaultMedia from '../../Assets/media/posty.jpg'
+import defaultMedia from '../../Assets/media/malone.jpg'
 
 import useImgDimHook from "../../Hooks/ImageDimHook";
 
 const Tweet = ({ tweetData }) => {
-  const {full_name, username, tweet_caption, id, comments, retweets, likes, views, datePosted, media, mediaURL } = tweetData;
+  const {full_name, username, tweet_caption, id, comments, comments_total, retweets, likes, views, datePosted, media, mediaURL } = tweetData;
   // const tweetMedia = media ? mediaURL : '';
   
   const mediaRef = useRef(null);
@@ -38,7 +38,7 @@ const Tweet = ({ tweetData }) => {
               <ion-icon name="chatbubbles-outline"></ion-icon>
             </span>
             <p className={`${styles["action-fig"]}`}>
-              <span className="center">{comments}</span>
+              <span className="center">{comments_total}</span>
             </p>
           </div>
           <div className={`${styles["action-span"]} row`}>

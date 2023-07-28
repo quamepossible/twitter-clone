@@ -1,5 +1,6 @@
 .centered {
     width: 600px;
+    /* height: 1300px; */
     height: auto;
     border: 1px solid var(--bordergray);
   }

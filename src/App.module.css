@@ -4,6 +4,8 @@
   --twitterblue: rgb(0, 140, 255);
   --bluelight: rgb(29, 153, 255);
   --graytext: #71767b;
+  --pendingblue: rgb(1, 103, 186);
+  --pendingtext: rgb(188, 188, 188);
 }
 
 .parent-container{
@@ -18,9 +20,7 @@
   height: auto;
   margin: auto;
   /* background-color: red; */
-
 }
-
 
 
 

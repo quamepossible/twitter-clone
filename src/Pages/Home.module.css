@@ -84,15 +84,6 @@
   position: relative;
 }
 
-.post-tweet-btn button {
-  border: none;
-  padding: 8px 20px;
-  font-weight: bold;
-  border-radius: 50px;
-  background-color: rgb(1, 103, 186);
-  color: rgb(188, 188, 188);
-}
-
 .hold-tweet-btns {
   width: 95%;
   height: auto;

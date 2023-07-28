@@ -30,3 +30,12 @@ a{
   top: 50%;
   transform: translate(-50%, -50%);
 }
+
+.pending-button{
+  border: none;
+  padding: 8px 20px;
+  font-weight: bold;
+  border-radius: 50px;
+  background-color: var(--pendingblue);
+  color: var(--pendingtext);
+}

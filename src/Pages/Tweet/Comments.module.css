@@ -1,0 +1,93 @@
+
+.each-comment {
+    width: 100%;
+    height: auto;
+    /* background-color: black; */
+    padding-bottom: 10px;
+    overflow: hidden;
+    border-bottom: 1px solid var(--bordergray);
+    line-height: 20px;
+    font-size: 15px;
+    font-weight: 400;
+  }
+  
+  .comm-aut-pic {
+    width: 70px;
+  }
+  
+  
+  .comm-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 15px 0 0 20px;
+    background-position: center;
+    background-size: cover;
+  }
+  
+  .comm-data {
+    width: 520px;
+    margin: 0 auto;
+  }
+  
+  .comm-about {
+    width: 100%;
+    height: 25px;
+    margin: 5px 0;
+  }
+  
+  .comm-names,
+  .comm-caption {
+    font-size: 15px;
+  }
+  
+  .comm-names {
+    width: 90%;
+    height: auto;
+    margin-top: 5px;
+  }
+  
+  .gray-info {
+    color: var(--graytext);
+  }
+  
+  .comm-menu, .tweet-menu {
+    width: 10%;
+    position: relative;
+  }
+  
+  .comm-caption {
+    height: auto;
+    margin-bottom: 10px;
+    margin-top: -5px;
+    font-weight: 200;
+  }
+  
+  .comm-actions {
+    width: 100%;
+    height: auto;
+    color: var(--graytext);
+    font-size: 14px;
+  }
+  
+  .each-action {
+    width: 20%;
+  }
+  
+  .action-icon,
+  .action-num {
+    width: 20px;
+    height: auto;
+    position: relative;
+  }
+  
+  .action-num {
+    width: 60px;
+    padding: 5px;
+  }
+  
+  .share-comm {
+    width: 20px;
+    margin-left: 65px;
+  }
+  

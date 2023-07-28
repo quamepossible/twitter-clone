@@ -54,7 +54,7 @@ const Home = ({tweetPostData}) => {
                 </div>
                 <div className={styles["centered-space"]}></div>
                 <div className={styles["post-tweet-btn"]}>
-                  <button className="center">Tweet</button>
+                  <button className="center pending-button">Tweet</button>
                 </div>
               </div>
             </div>
