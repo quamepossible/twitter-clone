@@ -14,6 +14,9 @@ import Likes from "./Pages/Profile/Likes";
 // single tweet page
 import TweetPage from "./Pages/Tweet/TweetPage";
 
+// ERROR 404
+import Error404 from "./Pages/Error/404";
+
 import styles from "./App.module.css";
 
 const tweetPostData = [
@@ -122,6 +125,7 @@ function App() {
     {
       path: "/",
       element: <HomeRouter />,
+      errorElement: <Error404 />,
       children: [
         { index: true, element: <Home tweetPostData={tweetPostData} /> },
         {
