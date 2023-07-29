@@ -60,10 +60,9 @@ const Home = ({tweetPostData}) => {
             </div>
           </div>
 
+        {/* render all tweets */}
         {tweetPostData.map((tweet, i) => <Tweet key={i} tweetData={tweet} />)}
-
-          
-
+        {/* render all tweets */}
 
         </div>
         {/* CENTER CONTENT */}

@@ -1,3 +1,4 @@
+import ModalProvider from "./Context/ModalProvider";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomeRouter from "./HomeRouter";
 
@@ -13,6 +14,9 @@ import Likes from "./Pages/Profile/Likes";
 
 // single tweet page
 import TweetPage from "./Pages/Tweet/TweetPage";
+
+// MEDIA MODAL
+import MediaModal from "./Pages/Modal/MediaModal";
 
 // ERROR 404
 import Error404 from "./Pages/Error/404";
@@ -57,7 +61,8 @@ const tweetPostData = [
         id: "228",
         full_name: "Asamoah Joshua",
         username: "fashion",
-        tweet_caption: "Fashion's comment, which must be under tender's comment",
+        tweet_caption:
+          "Fashion's comment, which must be under tender's comment",
         comments_total: "1",
         retweets: "23",
         likes: "900",
@@ -106,9 +111,27 @@ const tweetPostData = [
     id: "123",
     full_name: "Post Malone",
     username: "post_malone",
-    tweet_caption: "And, oh!... You can't do all the cool stuffs for now. I'm still building the interface and I'm hoping to give you a wonderful UX very soon 😔",
+    tweet_caption:
+      "And, oh!... You can't do all the cool stuffs for now. I'm still building the interface and I'm hoping to give you a wonderful UX very soon 😔",
     comments_total: "350",
-    comments: [],
+    comments: [
+      {
+        ref_to: "123",
+        id: "339",
+        full_name: "Austin Richard Post",
+        username: "posty",
+        tweet_caption: "Posty's comment",
+        comments_total: "2",
+        retweets: "10",
+        likes: "100",
+        views: "1,200",
+        datePosted: "Jul 25",
+        timePosted: "2:30 AM",
+        mediaURL: "austin.jpg",
+        media: false,
+        location: "Accra, Ghana",
+      }
+    ],
     retweets: "40",
     likes: "110",
     views: "80",
@@ -121,6 +144,7 @@ const tweetPostData = [
 ];
 
 function App() {
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -141,28 +165,31 @@ function App() {
         },
         {
           path: "profile/status/:id",
+          id: 'status',
           children: [
             {
               index: true,
               element: <TweetPage />,
               loader: function ({ _, params }) {
-                const getTweetById = tweetPostData.filter(
-                  (tweet) => tweet.id === params.id
-                );
-                console.log(getTweetById);
+                // fetch and return the tweet data of the tweet with using the slug provided at (:id)
+                const getTweetById = tweetPostData.filter((tweet) => tweet.id === params.id);
                 return getTweetById[0];
               },
             },
-            { path: "photo/:num", element: "" },
+            { path: "photo/:num", element: <MediaModal defaultModalState={true} /> },
           ],
         },
       ],
     },
   ]);
+
+  console.log('App running');
   return (
     <section className={styles["parent-container"]}>
       <div className={`${styles["hold-page"]} row`}>
-        <RouterProvider router={router}></RouterProvider>
+        <ModalProvider>
+          <RouterProvider router={router} />
+        </ModalProvider>
       </div>
     </section>
   );

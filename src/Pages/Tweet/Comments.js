@@ -72,10 +72,16 @@ const CommentUI = ({eachComment, bottomLine}) => {
 }
 
 const Comments = ({theComment, allComments}) => {
+    // we get all comments of the clicked tweets on this component
+    // this is to check if the currently rendered comment under the tweet
+        // also has comments under it, so that we can render those sub comments as well
     const subComments = allComments.filter(comment => comment.ref_to === theComment.id)
     return (
         <div className={`${styles['each-comment']} row`}>
+            {/* render Individual Comment which is direct to the Tweet's post  */}
             <CommentUI eachComment={theComment} />
+            
+            {/* render comments which are sub comments of the above rendered comment */}
             {subComments.length > 0 && subComments.map(subComm => <CommentUI key={subComm.id} eachComment={subComm} />)}
         </div>
     )
