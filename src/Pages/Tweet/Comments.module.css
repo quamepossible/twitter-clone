@@ -12,7 +12,7 @@
   }
   
   .comm-aut-pic {
-    width: 70px;
+    width: 12%;
   }
   
   
@@ -26,7 +26,7 @@
   }
   
   .comm-data {
-    width: 520px;
+    width: 88%;
     margin: 0 auto;
   }
   
@@ -72,6 +72,8 @@
   
   .each-action {
     width: 20%;
+    /* border:1px solid black; */
+    white-space: nowrap;
   }
   
   .action-icon,

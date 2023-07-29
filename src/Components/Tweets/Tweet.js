@@ -9,7 +9,7 @@ import defaultMedia from '../../Assets/media/malone.jpg'
 import useImgDimHook from "../../Hooks/ImageDimHook";
 
 const Tweet = ({ tweetData }) => {
-  const {full_name, username, tweet_caption, id, comments, comments_total, retweets, likes, views, datePosted, media, mediaURL } = tweetData;
+  const {full_name, username, tweet_caption, id, comments_total, retweets, likes, views, datePosted, media, mediaURL } = tweetData;
   // const tweetMedia = media ? mediaURL : '';
   
   //  initialize a ref, and adjust the dimenstions (width and height) of the tweet's 

@@ -9,17 +9,51 @@ import Posty from '../../Assets/media/posty.jpg';
 import Boogie from '../../Assets/media/malone.jpg';
 
 import styles from './TweetPage.module.css';
+import mediaStyle from '../Modal/ModalLayout.module.css';
 
-const TweetPage = () => {
+const TweetPage = ({dataFromModal}) => {
     const ModalActions = useContext(ModalCtx);
-    const { modalDataInfo, onOpenModal, onCloseModal } = ModalActions;
+    const { onOpenModal } = ModalActions;
     // const {modalState, activeStatusID, comments: tweetComments} = modalDataInfo;
 
+    let  id, full_name, username, tweet_caption, comments, retweets, likes, views, datePosted, timePosted, mediaURL, media, location;
+    if(dataFromModal){
+        console.log('hi')
+        id = dataFromModal.id;
+        full_name = dataFromModal.full_name;
+        username = dataFromModal.username;
+        tweet_caption = dataFromModal.tweet_caption;
+        comments = dataFromModal.comments;
+        retweets = dataFromModal.retweets;
+        likes = dataFromModal.likes;
+        views = dataFromModal.views;
+        datePosted = dataFromModal.datePosted;
+        timePosted = dataFromModal.timePosted;
+        media = false;
+        location = dataFromModal.location;
+
+    }
     // get the data of the clicked tweet from the loader function on path '/profile/status/:id'
     const tweetData = useLoaderData();
-    const { id, full_name, username, tweet_caption, comments, comments_total, retweets, likes, views, datePosted, timePosted, mediaURL, media, location } = tweetData;
+    if(tweetData){
+        // { id, full_name, username, tweet_caption, comments, retweets, likes, views, datePosted, timePosted, mediaURL, media, location } = tweetData;
+        id = tweetData.id;
+        full_name = tweetData.full_name;
+        username = tweetData.username;
+        tweet_caption = tweetData.tweet_caption;
+        comments = tweetData.comments;
+        retweets = tweetData.retweets;
+        likes = tweetData.likes;
+        views = tweetData.views;
+        datePosted = tweetData.datePosted;
+        timePosted = tweetData.timePosted;
+        media = tweetData.media;
+        location = tweetData.location;
+    }
+
+    const isModalCall = !tweetData;
     
-    //  initialize a ref, and adjust the dimenstions (width and height) of the clicked tweet's 
+    //  initialize a ref, and adjust the dimensions (width and height) of the clicked tweet's 
     //     media (photo and video)
     const mediaRef = useRef(null)
     useImgDimHook(mediaRef, Boogie);
@@ -32,14 +66,14 @@ const TweetPage = () => {
             // this enables the page to identify comments which are direct comments to the tweet
                 // but not a comment of a comment.
             // 2. Get <Comments /> component (which renders each comment) and assign it to loadComments;
-        const loadComments = comments.length > 0 ? comments.filter(comment => comment.ref_to === id).map(comment => <Comments key={comment.id} theComment={comment} allComments={comments} />) : [];
+        const loadComments = comments.length > 0 ? comments.filter(comment => comment.ref_to === id).map(comment => <Comments key={comment.id} isModal={isModalCall} theComment={comment} allComments={comments} />) : [];
 
     // when the media (photo / video) of a tweet is clicked
         // a modal will open with the tweet's data
     const openModal = () => {
         // pass the opened tweet's data (including comments) to the Modal Context
             // this ensures the tweet's modal get's access to the opened tweet's data
-        onOpenModal({modalState: true, activeStatusID: id, tweetComments: comments});
+        onOpenModal({modalState: true, activeStatusID: id, tweetComments: comments, theTweetData: tweetData});
     }
 
     // URL to tweet's modal component
@@ -49,38 +83,39 @@ const TweetPage = () => {
     const actionIcons = [["chatbubbles-outline"], ["git-compare-outline"],["heart-outline"],["bookmark-outline"],["share-outline"],];
 
 
+    // const whatClass = tweetData ? 
     return(
     <div className={styles['tweet-content']}>
-        <div className={`${styles['tweet-nav']} row`}>
+        {tweetData && <div className={`${styles['tweet-nav']} row`}>
             <div className={styles['back-icon']}>
                 <span className={`${styles['back-symbol']} material-symbols-outlined center`}>arrow_back</span>
             </div>
             <div className={styles['about']}>
                 <p className={`${styles['about-name']} center`}>Tweet</p>
             </div>
-        </div>
+        </div>}
 
         {/* TWEET AUTHOR INFO AND CAPTION */}
-        <div className={`${styles['author-details']} row`}>
-            <div className={styles['author-photo']}>
-                <div style={{backgroundImage: `url(${Posty}`}} className={styles['comm-pic']} />
+        <div className={`${tweetData ? styles['author-details'] : mediaStyle['author-details']} row`}>
+            <div className={tweetData ? styles['author-photo'] : mediaStyle['author-photo']}>
+                <div style={{backgroundImage: `url(${Posty}`}} className={tweetData ? styles['comm-pic'] : mediaStyle['comm-pic']} />
             </div>
-            <div className={styles['author-names']}>
+            <div className={tweetData ? styles['author-names'] : mediaStyle['author-names']}>
                 <p>{full_name}</p>
-                <p className={styles['author-username']}>@<span>{username}</span></p>
+                <p className={tweetData ? styles['author-username'] : mediaStyle['author-username']}>@<span>{username}</span></p>
             </div>
-            <div className={styles['tweet-menu']}>
+            <div className={tweetData ? styles['tweet-menu'] : mediaStyle['tweet-menu']}>
                 <ion-icon style={{color: '#71767b'}} name="ellipsis-horizontal"></ion-icon>
             </div>
         </div>
-        <div className={styles['tweet-caption']}>
-            <p className={styles['tweet-text']}>{tweet_caption}</p>
+        <div className={tweetData ? styles['tweet-caption'] : mediaStyle['tweet-caption']}>
+            <p className={tweetData ? styles['tweet-text'] : mediaStyle['tweet-text']}>{tweet_caption}</p>
         </div>
         {/* TWEET AUTHOR INFO AND CAPTION */}
 
 
         {/* TWEET MEDIA IF AVAILABLE */}
-        {media && 
+        {media && tweetData &&
             // this is the media section of the visited tweet
                 // when clicked, we send tweet data to the modal context
                 // then, the tweet modal opens
@@ -93,7 +128,7 @@ const TweetPage = () => {
         {/* TWEET MEDIA IF AVAILABLE */}
 
         {/* TWEET AUTHOR LOCATION AND DATE */}
-        <div className={styles['tweet-info']}>
+        <div className={tweetData ? styles['tweet-info'] : mediaStyle['tweet-info']}>
             <p className='center'>
                 <span>{timePosted}</span>
                 <span className={styles['hold-dot']}>
@@ -133,15 +168,15 @@ const TweetPage = () => {
 
         {/* ADD COMMENT TO TWEET */}
         <div className={`${styles['add-tweet-comment']} row`}>
-            <div className={styles['composer-pic']}>
-                <div className={`${styles['add-com-pic']} center`} style={{backgroundImage: `url(${Boogie})`}}></div>
+            <div className={tweetData ? styles['composer-pic'] : mediaStyle['composer-pic']}>
+                <div className={`${tweetData? styles['add-com-pic'] : mediaStyle['add-com-pic']} center`} style={{backgroundImage: `url(${Boogie})`}}></div>
             </div>
-            <div className={styles['composer-form']}>
+            <div className={tweetData ? styles['composer-form'] : mediaStyle['composer-form']}>
                 <form className='center'>
                     <input type='text' className={styles['comm-input']} placeholder='Tweet your reply!' />
                 </form>
             </div>
-            <div className={styles['reply-btn']}>
+            <div className={tweetData ? styles['reply-btn'] : mediaStyle['reply-btn']}>
                 <button type='button' className={`${styles['submit-btn']} center pending-button`}>Reply</button>
             </div>
         </div>

@@ -10,6 +10,7 @@ const initModalState = {
   modalState: false,
   activeStatusID: "",
   tweetComments: [],
+  theTweetData: {},
 };
 
 const modalReducer = (_, action) => {

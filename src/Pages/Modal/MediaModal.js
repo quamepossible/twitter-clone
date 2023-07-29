@@ -1,16 +1,18 @@
 import { useEffect, useContext } from 'react';
 import { createPortal } from 'react-dom';
 
+import TweetPage from '../Tweet/TweetPage';
+
 import styles from './MediaModal.module.css';
 import { ModalCtx } from '../../Context/ModalProvider';
 import Posty from '../../Assets/media/malone.jpg';
 
 const Modal = ({modalActions}) => {
     const { modalDataInfo, onCloseModal } = modalActions;
-    const {modalState, activeStatusID, tweetComments} = modalDataInfo;
+    const {modalState, activeStatusID, tweetComments, theTweetData} = modalDataInfo;
 
     useEffect(() => {
-        console.log(tweetComments);
+        console.log(theTweetData);
 
         if(modalState){        
             // Store the current scroll position
@@ -33,7 +35,9 @@ const Modal = ({modalActions}) => {
         <div className={`${styles['hold-modal']} row`}>
             <div className={`${styles['back-drop']}`} onClick={closeModal}></div>
             <div className={`${styles['comment-section']}`}>
-                <div className={styles['hold-comments']}></div>
+                <div className={styles['hold-comments']}>
+                    <TweetPage dataFromModal={theTweetData} />
+                </div>
             </div>
         </div>
         <div className={styles['modal-media']} style={{backgroundImage: `url(${Posty})`}}></div>

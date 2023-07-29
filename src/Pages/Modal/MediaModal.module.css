@@ -10,17 +10,20 @@
 
 }
 .back-drop {
-  width: 77%;
+  width: 76%;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.78);
+  background-color: rgba(0, 0, 0, 0.92);
   overflow: hidden;
 }
 
 .comment-section{
-    width: 23%;
+    width: 24%;
+    border-left: 1px solid var(--bordergray);
+    padding-left: 5px;
     height: 100vh;
-    overflow: auto;
-    background-color: red;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: black;
 }
 
 .hold-comments{
