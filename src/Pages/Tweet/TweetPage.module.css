@@ -59,7 +59,6 @@
 .author-names{
     width: 77%;
     margin: auto;
-    /* background-color: red; */
 }
 
 .author-username{
@@ -67,7 +66,8 @@
 }
 
 .tweet-menu{
-    width: 10%;;
+    width: 10%;
+    position: relative;
 }
 
 .tweet-caption {
@@ -198,7 +198,6 @@
 
 .hold-insight{
     width: 100%;
-    /* background-color: red; */
     margin: auto;
     color: var(--graytext)
 }

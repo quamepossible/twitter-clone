@@ -32,7 +32,7 @@ const CommentUI = ({eachComment, modalOpen, bottomLine}) => {
             {/* COMMENT AUTHOR INFO */}
             <div className={`${modalOpen ? mediaStyle['comm-about'] : styles['comm-about']} row`}>
                 <div className={modalOpen ? mediaStyle['comm-names'] : styles['comm-names']}>
-                    <p><span className={modalOpen && mediaStyle['comm-aut-pic']}>{full_name}</span> <span className={modalOpen ? mediaStyle['gray-info'] : styles['gray-info']}>@{username}</span> <span  className={styles['gray-info']}>.</span> <span className={styles['gray-info']}>{datePosted}</span></p>
+                    <p><span className={modalOpen ? mediaStyle['comm-aut-pic'] : ''}>{full_name}</span> <span className={modalOpen ? mediaStyle['gray-info'] : styles['gray-info']}>@{username}</span> <span  className={styles['gray-info']}>.</span> <span className={styles['gray-info']}>{datePosted}</span></p>
                 </div>
 
                 {/* COMMENT MENU ICON */}

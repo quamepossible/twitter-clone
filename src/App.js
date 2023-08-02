@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import ModalProvider from "./Context/ModalProvider";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomeRouter from "./HomeRouter";
@@ -23,6 +24,8 @@ import Error404 from "./Pages/Error/404";
 
 import styles from "./App.module.css";
 
+
+
 const tweetPostData = [
   {
     id: "456",
@@ -39,111 +42,48 @@ const tweetPostData = [
     mediaURL: "austin.jpg",
     media: false,
     location: "Accra, Ghana",
-    comments: [
-      {
-        ref_to: "456",
-        id: "339",
-        full_name: "Baffoe Samuel",
-        username: "tender",
-        tweet_caption: "Tender's comment",
-        comments_total: "2",
-        retweets: "10",
-        likes: "100",
-        views: "1,200",
-        datePosted: "Jul 25",
-        timePosted: "2:30 AM",
-        mediaURL: "austin.jpg",
-        media: false,
-        location: "Accra, Ghana",
-      },
-      {
-        ref_to: "339",
-        id: "228",
-        full_name: "Asamoah Joshua",
-        username: "fashion",
-        tweet_caption:
-          "Fashion's comment, which must be under tender's comment",
-        comments_total: "1",
-        retweets: "23",
-        likes: "900",
-        views: "5,200",
-        datePosted: "Jul 26",
-        timePosted: "5:20 AM",
-        mediaURL: "austin.jpg",
-        media: false,
-        location: "Kumasi, Ashanti",
-      },
-      {
-        ref_to: "228",
-        id: "440",
-        full_name: "Mr Drew",
-        username: "drew",
-        tweet_caption: "Drew's comment, which must be under fashion's comment",
-        comments_total: "3",
-        retweets: "9",
-        likes: "180",
-        views: "150",
-        datePosted: "Jul 28",
-        timePosted: "8:50 PM",
-        mediaURL: "austin.jpg",
-        media: false,
-        location: "Abuakwa, Ashanti",
-      },
-      {
-        ref_to: "456",
-        id: "539",
-        full_name: "Kwabena Benedict",
-        username: "kobby",
-        tweet_caption: "This is a main comment under the main tweet",
-        comments_total: "1",
-        retweets: "10",
-        likes: "32",
-        views: "830",
-        datePosted: "Jul 27",
-        timePosted: "7:18 PM",
-        mediaURL: "austin.jpg",
-        media: false,
-        location: "Sunyani, Brong",
-      },
-    ],
-  },
-  {
-    id: "123",
-    full_name: "Post Malone",
-    username: "post_malone",
-    tweet_caption:
-      "And, oh!... You can't do all the cool stuffs for now. I'm still building the interface and I'm hoping to give you a wonderful UX very soon 😔",
-    comments_total: "350",
-    comments: [
-      {
-        ref_to: "123",
-        id: "339",
-        full_name: "Austin Richard Post",
-        username: "posty",
-        tweet_caption: "Posty's comment",
-        comments_total: "2",
-        retweets: "10",
-        likes: "100",
-        views: "1,200",
-        datePosted: "Jul 25",
-        timePosted: "2:30 AM",
-        mediaURL: "austin.jpg",
-        media: false,
-        location: "Accra, Ghana",
-      }
-    ],
-    retweets: "40",
-    likes: "110",
-    views: "80",
-    datePosted: "Jul 20",
-    timePosted: "4:15 PM",
-    mediaURL: "austin.jpg",
-    media: true,
-    location: "Sunyani, Ghana",
+    comments: [{
+      ref_to: "123",
+      id: "234",
+      full_name: "Austin Richard Post",
+      username: "posty",
+      tweet_caption: "Posty's comment",
+      comments_total: "2",
+      retweets: "10",
+      likes: "100",
+      views: "1,200",
+      datePosted: "Jul 25",
+      timePosted: "2:30 AM",
+      mediaURL: "austin.jpg",
+      media: false,
+      location: "Accra, Ghana",
+    }],
   },
 ];
 
 function App() {
+  const [allTweets, setAllTweets] = useState([]);
+
+  useEffect(() => {
+    const fetchTweets = async() => {
+      try{
+        const tweetsRes = await fetch('http://localhost:3005/all-tweets');
+        if(!tweetsRes.ok) throw new Error('fetch failed');
+        return tweetsRes.json();
+      } catch(err) {
+        return {status: 'failed'}
+      }
+    }
+    fetchTweets().then(tweets => {
+      if(tweets.status){
+        console.log(tweets.status);
+      }
+      else{
+        setAllTweets(tweets)
+      }
+    });
+
+  }, [])
 
   const router = createBrowserRouter([
     {
@@ -151,12 +91,12 @@ function App() {
       element: <HomeRouter />,
       errorElement: <Error404 />,
       children: [
-        { index: true, element: <Home tweetPostData={tweetPostData} /> },
+        { index: true, element: <Home tweetPostData={allTweets} /> },
         {
           path: "profile",
           element: <Profile />,
           children: [
-            { index: true, element: <Tweets tweetPostData={tweetPostData} /> },
+            { index: true, element: <Tweets tweetPostData={allTweets} /> },
             { path: "replies", element: <Replies /> },
             { path: "highlights", element: <Highlights /> },
             { path: "media", element: <Media /> },
@@ -172,7 +112,7 @@ function App() {
               element: <TweetPage />,
               loader: function ({ _, params }) {
                 // fetch and return the tweet data of the tweet with using the slug provided at (:id)
-                const getTweetById = tweetPostData.filter((tweet) => tweet.id === params.id);
+                const getTweetById = allTweets.filter((tweet) => tweet.author_id === params.id);
                 return getTweetById[0];
               },
             },

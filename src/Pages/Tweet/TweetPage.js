@@ -6,7 +6,7 @@ import useImgDimHook from '../../Hooks/ImageDimHook';
 import Comments from './Comments';
 
 import Posty from '../../Assets/media/posty.jpg';
-import Boogie from '../../Assets/media/malone.jpg';
+import Boogie from '../../Assets/media/posty.jpg';
 
 import styles from './TweetPage.module.css';
 import mediaStyle from '../Modal/ModalLayout.module.css';
@@ -16,39 +16,39 @@ const TweetPage = ({dataFromModal}) => {
     const { onOpenModal } = ModalActions;
     // const {modalState, activeStatusID, comments: tweetComments} = modalDataInfo;
 
-    let  id, full_name, username, tweet_caption, comments, retweets, likes, views, datePosted, timePosted, mediaURL, media, location;
+    let  id, full_name, username, tweet_caption, comments, retweets, likes, views, datePosted, timePosted, media_url, media, location;
     if(dataFromModal){
-        console.log('hi')
-        id = dataFromModal.id;
-        full_name = dataFromModal.full_name;
-        username = dataFromModal.username;
+        id = dataFromModal.author_id;
+        full_name = "Kwame Appiah";
+        username = "_mission";
         tweet_caption = dataFromModal.tweet_caption;
         comments = dataFromModal.comments;
         retweets = dataFromModal.retweets;
         likes = dataFromModal.likes;
         views = dataFromModal.views;
-        datePosted = dataFromModal.datePosted;
-        timePosted = dataFromModal.timePosted;
+        datePosted = "Jul 27";
+        timePosted = "10:45 AM";
         media = false;
-        location = dataFromModal.location;
-
+        media_url = dataFromModal.media_url
+        location = "Kumasi, Ghana";
     }
     // get the data of the clicked tweet from the loader function on path '/profile/status/:id'
     const tweetData = useLoaderData();
     if(tweetData){
         // { id, full_name, username, tweet_caption, comments, retweets, likes, views, datePosted, timePosted, mediaURL, media, location } = tweetData;
-        id = tweetData.id;
-        full_name = tweetData.full_name;
-        username = tweetData.username;
+        id = tweetData.author_id;
+        full_name = "Kwame Appiah";
+        username = "_mission";
         tweet_caption = tweetData.tweet_caption;
         comments = tweetData.comments;
         retweets = tweetData.retweets;
         likes = tweetData.likes;
         views = tweetData.views;
-        datePosted = tweetData.datePosted;
-        timePosted = tweetData.timePosted;
+        datePosted = "Jul 27";
+        timePosted = "10:45 AM";
         media = tweetData.media;
-        location = tweetData.location;
+        media_url = tweetData.media_url
+        location = "Kumasi, Ghana";
     }
 
     const isModalCall = !tweetData;
@@ -56,7 +56,7 @@ const TweetPage = ({dataFromModal}) => {
     //  initialize a ref, and adjust the dimensions (width and height) of the clicked tweet's 
     //     media (photo and video)
     const mediaRef = useRef(null)
-    useImgDimHook(mediaRef, Boogie);
+    useImgDimHook(mediaRef, media_url);
 
     // check if the clicked tweet has comments
         // if no comments found, set loadComments = [];
@@ -121,7 +121,7 @@ const TweetPage = ({dataFromModal}) => {
                 // then, the tweet modal opens
             <Link onClick={openModal} to={modalURL}>
                 <div className={styles['tweet-media']}>
-                    <div ref={mediaRef} className={styles['tweet-main-media']} style={{backgroundImage: `url(${Boogie})`}}></div>
+                    <div ref={mediaRef} className={styles['tweet-main-media']} style={{backgroundImage: `url(${media_url})`}}></div>
                 </div>
             </Link>
         }

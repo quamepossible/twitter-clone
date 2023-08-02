@@ -1,11 +1,11 @@
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
 import TweetPage from '../Tweet/TweetPage';
 
 import styles from './MediaModal.module.css';
 import { ModalCtx } from '../../Context/ModalProvider';
-import Posty from '../../Assets/media/malone.jpg';
+import Posty from '../../Assets/media/posty.jpg';
 
 const Modal = ({modalActions}) => {
     const { modalDataInfo, onCloseModal } = modalActions;
@@ -40,7 +40,7 @@ const Modal = ({modalActions}) => {
                 </div>
             </div>
         </div>
-        <div className={styles['modal-media']} style={{backgroundImage: `url(${Posty})`}}></div>
+        <div className={styles['modal-media']} style={{backgroundImage: `url(${theTweetData.media_url})`}}></div>
         </>
     ))
 }

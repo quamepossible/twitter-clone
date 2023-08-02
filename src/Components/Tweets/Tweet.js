@@ -9,19 +9,19 @@ import defaultMedia from '../../Assets/media/malone.jpg'
 import useImgDimHook from "../../Hooks/ImageDimHook";
 
 const Tweet = ({ tweetData }) => {
-  const {full_name, username, tweet_caption, id, comments_total, retweets, likes, views, datePosted, media, mediaURL } = tweetData;
+  const {full_name, username, comments, tweet_caption, author_id, retweets, likes, views, datePosted, media, media_url } = tweetData;
   // const tweetMedia = media ? mediaURL : '';
   
   //  initialize a ref, and adjust the dimenstions (width and height) of the tweet's 
     //     media (photo and video) on the home page
   const mediaRef = useRef(null);
-  useImgDimHook(mediaRef, defaultMedia);
+  useImgDimHook(mediaRef, media_url);
 
   // url to open tweet on a full page
-  const tweetPath = `/profile/status/${id}`;
+  const tweetPath = `/profile/status/${author_id}`;
 
   // TWEET ACTIONS ARRAY
-  const commentsActionArr = [[comments_total, 'chatbubbles-outline'], [retweets, 'git-compare-outline'], [likes, 'heart-outline'], [views, 'stats-chart']];
+  const commentsActionArr = [[comments.length, 'chatbubbles-outline'], [retweets, 'git-compare-outline'], [likes, 'heart-outline'], [views, 'stats-chart']];
   
   return (
     <NavLink to={tweetPath} className={`${styles["tweets"]} row`}>
@@ -34,11 +34,11 @@ const Tweet = ({ tweetData }) => {
       <div className={styles["tweet-content"]}>
         {/* TWEET AUTHOR BIO, DATE TWEETED */}
         <div className={styles["author-name"]}>
-          <span className={styles["profile-name"]}>{full_name}</span>{" "}
+          <span className={styles["profile-name"]}>Kwame Opoku Appiah</span>{" "}
           <span className={styles["check-mark"]}></span>{" "}
-          <span className={styles["user-name"]}>@{username}</span>{" "}
+          <span className={styles["user-name"]}>@young_kay</span>{" "}
           <span className={`${styles['dot']}`}><span className="center" style={{display: 'inline-block', height:'30px'}}>.</span></span>
-          <span className={styles['date-tweeted']}>{datePosted}</span>
+          <span className={styles['date-tweeted']}>Jul 30</span>
         </div>
         {/* TWEET AUTHOR BIO, DATE TWEETED */}
 
@@ -47,7 +47,7 @@ const Tweet = ({ tweetData }) => {
         {/* TWEET CAPTION */}
 
         {/* TWEET MEDIA IF AVAILABLE */}
-        {media && <div ref={mediaRef} className={styles["tweet-media"]} style={{backgroundImage: `url(${defaultMedia})`}}></div>}
+        {media && <div ref={mediaRef} className={styles["tweet-media"]} style={{backgroundImage: `url(${media_url})`}}></div>}
         {/* TWEET MEDIA IF AVAILABLE */}
         
         {/* TWEET INSIGHT AND ACTIONS */}
