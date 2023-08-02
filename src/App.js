@@ -67,7 +67,7 @@ function App() {
   useEffect(() => {
     const fetchTweets = async() => {
       try{
-        const tweetsRes = await fetch('http://localhost:3005/all-tweets');
+        const tweetsRes = await fetch(process.env.REACT_APP_FETCH_TWEETS);
         if(!tweetsRes.ok) throw new Error('fetch failed');
         return tweetsRes.json();
       } catch(err) {

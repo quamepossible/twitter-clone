@@ -5,7 +5,6 @@ import TweetPage from '../Tweet/TweetPage';
 
 import styles from './MediaModal.module.css';
 import { ModalCtx } from '../../Context/ModalProvider';
-import Posty from '../../Assets/media/posty.jpg';
 
 const Modal = ({modalActions}) => {
     const { modalDataInfo, onCloseModal } = modalActions;
