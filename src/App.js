@@ -14,7 +14,7 @@ import Media from "./Pages/Profile/Media";
 import Likes from "./Pages/Profile/Likes";
 
 // single tweet page
-import TweetPage from "./Pages/Tweet/TweetPage";
+import TweetPage, {TweetPageError} from "./Pages/Tweet/TweetPage";
 
 // MEDIA MODAL
 import MediaModal from "./Pages/Modal/MediaModal";
@@ -89,7 +89,7 @@ function App() {
     {
       path: "/",
       element: <HomeRouter />,
-      errorElement: <Error404 />,
+      // errorElement: <Error404 />,
       children: [
         { index: true, element: <Home tweetPostData={allTweets} /> },
         {
@@ -110,9 +110,12 @@ function App() {
             {
               index: true,
               element: <TweetPage />,
+              errorElement: <TweetPageError />,
               loader: function ({ _, params }) {
                 // fetch and return the tweet data of the tweet with using the slug provided at (:id)
                 const getTweetById = allTweets.filter((tweet) => tweet.author_id === params.id);
+                console.log(getTweetById);
+
                 return getTweetById[0];
               },
             },
