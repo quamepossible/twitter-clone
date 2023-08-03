@@ -1,10 +1,11 @@
+import { useLoaderData } from 'react-router';
 import styles from './Home.module.css';
 import dp from "../Assets/dp.jpg";
 import Tweet from '../Components/Tweets/Tweet';
 
 
-const Home = ({tweetPostData}) => {
- 
+const Home = () => {
+  const getAllTweets = useLoaderData();
     return (
         <>
         {/* CENTER CONTENT */}
@@ -61,7 +62,7 @@ const Home = ({tweetPostData}) => {
           </div>
 
         {/* render all tweets */}
-        {tweetPostData.map((tweet, i) => <Tweet key={i} tweetData={tweet} />)}
+        {getAllTweets.map((tweet, i) => <Tweet key={i} tweetData={tweet} />)}
         {/* render all tweets */}
 
         </div>
