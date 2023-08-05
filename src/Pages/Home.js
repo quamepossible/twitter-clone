@@ -1,15 +1,18 @@
-import { useLoaderData } from 'react-router';
+import { useLoaderData, useNavigation } from 'react-router';
 import styles from './Home.module.css';
 import dp from "../Assets/dp.jpg";
 import Tweet from '../Components/Tweets/Tweet';
 
 
 const Home = () => {
+  const theNav = useNavigation();
+  const loading = theNav.state === 'loading';
   const getAllTweets = useLoaderData();
     return (
         <>
         {/* CENTER CONTENT */}
-        <div className={styles["content-section"]}>
+        {loading && <p>Loading Home Page</p>}
+        {!loading && <div className={styles["content-section"]}>
           <div className={styles["top-home"]}></div>
           <div className={`${styles["post-tweet"]} row`}>
             <div className={styles["tweeter-dp"]}>
@@ -65,7 +68,7 @@ const Home = () => {
         {getAllTweets.map((tweet, i) => <Tweet key={i} tweetData={tweet} />)}
         {/* render all tweets */}
 
-        </div>
+        </div>}
         {/* CENTER CONTENT */}
         </>
     )

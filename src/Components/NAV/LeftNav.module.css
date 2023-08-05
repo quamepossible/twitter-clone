@@ -10,7 +10,6 @@ a{
   position: sticky;
   top: 0;
   height: 100vh;
-  /* background-color: red; */
 }
 
 
@@ -96,5 +95,70 @@ a{
     padding: 15px 0;
     border-radius: 100px;
     background-color: var(--twitterblue);
+  }
+
+  .login, .login-field{
+    padding: 0 10px;
+    width: 280px;
+    height: 70px;
+    border-radius: 90px;
+    overflow: hidden;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    bottom: 0px;
+    transition: 0.2s;
+    cursor: pointer;
+  }
+
+  .login:hover{
+    background-color: var(--offblack);
+  }
+
+  .hold-user-pic, .user-details, .log-menu{
+    height: 100%;
+  }
+
+  .hold-user-pic{
+    width: 40px;
+    position: relative;
+  }
+
+  .user-pic{
+    width: 40px;
+    height: 40px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+  }
+  .user-details{
+    width: 180px;
+    height: 40px;
+    margin: auto;
+    padding-left: 10px;
+    /* background-color: pink; */
+  }
+
+  .user-name{
+    color: var(--graytext)
+  }
+
+  .log-menu{
+    width: 30px;
+    position: relative;
+    /* background-color: red; */
+  }
+
+  .login-field{
+    background-color: var(--twitterblue);
+    font-size: 22px;
+    font-weight: bold;
+
+  }
+
+  .login-text p{
+    text-align: center;
+    background-color: green;
+    color: blue;
   }
   /* left section */

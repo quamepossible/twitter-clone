@@ -13,13 +13,16 @@ import Media from "./Pages/Profile/Media";
 import Likes from "./Pages/Profile/Likes";
 
 // import utility functions
-import { tweetsLoader } from "./util/tweets-fetch";
+import { tweetsLoader, singleTweetLoader, eachProfileTweetsLoader } from "./util/tweets-fetch";
 
 // single tweet page
 import TweetPage, {TweetPageError} from "./Pages/Tweet/TweetPage";
 
 // MEDIA MODAL
 import MediaModal from "./Pages/Modal/MediaModal";
+
+// LOGIN MODAL
+import Login from "./Components/LoginModal/Login";
 
 // ERROR 404
 import Error404 from "./Pages/Error/404";
@@ -74,13 +77,13 @@ function App() {
         { 
           index: true, 
           element: <Home />,
-          loader: tweetsLoader
+          loader: tweetsLoader,
         },
         {
-          path: "profile",
+          path: ":username",
           element: <Profile />,
           children: [
-            { index: true, element: <Tweets tweetPostData={[]} /> },
+            { index: true, element: <Tweets />, loader: eachProfileTweetsLoader },
             { path: "replies", element: <Replies /> },
             { path: "highlights", element: <Highlights /> },
             { path: "media", element: <Media /> },
@@ -88,26 +91,24 @@ function App() {
           ],
         },
         {
-          path: "profile/status/:id",
+          path: ":username/status/:id",
           id: 'status',
           children: [
             {
               index: true,
               element: <TweetPage />,
               errorElement: <TweetPageError />,
-              loader: function ({ _, params }) {
-                // fetch and return the tweet data of the tweet with using the slug provided at (:id)
-                // const getTweetById = allTweets.filter((tweet) => tweet.author_id === params.id);
-                // console.log(getTweetById);
-
-                // return getTweetById[0];
-              },
+              loader: singleTweetLoader,
             },
             { path: "photo/:num", element: <MediaModal defaultModalState={true} /> },
           ],
         },
       ],
     },
+    {
+      path: 'auth',
+      element: <Login/>
+    }
   ]);
 
   console.log('App running');

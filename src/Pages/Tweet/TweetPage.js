@@ -12,19 +12,23 @@ import styles from './TweetPage.module.css';
 import mediaStyle from '../Modal/ModalLayout.module.css';
 
 export const TweetPageError = () => {
-    return <p>Loading...</p>
+    return <p>Error Loading Single Tweet</p>
 }
 
 const TweetPage = ({dataFromModal}) => {
+    const theNav = useNavigation();
+    const tweetLoading = theNav.state === 'loading';
+    console.log(theNav.state);
 
 
     const ModalActions = useContext(ModalCtx);
     const { onOpenModal } = ModalActions;
     // const {modalState, activeStatusID, comments: tweetComments} = modalDataInfo;
 
-    let  id, full_name, username, tweet_caption, comments, retweets, likes, views, datePosted, timePosted, media_url, media, location;
+    let  id, tweet_id, full_name, username, tweet_caption, comments, retweets, likes, views, datePosted, timePosted, media_url, media, location;
     if(dataFromModal){
         id = dataFromModal.author_id;
+        tweet_id = dataFromModal.tweet_id;
         full_name = "Kwame Appiah";
         username = "_mission";
         tweet_caption = dataFromModal.tweet_caption;
@@ -43,6 +47,7 @@ const TweetPage = ({dataFromModal}) => {
     if(tweetData){
         // { id, full_name, username, tweet_caption, comments, retweets, likes, views, datePosted, timePosted, mediaURL, media, location } = tweetData;
         id = tweetData.author_id;
+        tweet_id = tweetData.tweet_id;
         full_name = "Kwame Appiah";
         username = "_mission";
         tweet_caption = tweetData.tweet_caption;
@@ -83,7 +88,7 @@ const TweetPage = ({dataFromModal}) => {
     }
 
     // URL to tweet's modal component
-    const modalURL = `/profile/status/${id}/photo/1`;
+    const modalURL = `/${id}/status/${tweet_id}/photo/1`;
 
     // TWEET'S ACTIONS SECTION
     const actionIcons = [["chatbubbles-outline"], ["git-compare-outline"],["heart-outline"],["bookmark-outline"],["share-outline"],];
@@ -92,8 +97,8 @@ const TweetPage = ({dataFromModal}) => {
     // const whatClass = tweetData ? 
     return(
         <>
-        {/* {tweetLoading && <p style={{color: 'red'}}>Tweet Loading</p>} */}
-        <div className={styles['tweet-content']}>
+        {tweetLoading && <p style={{color: 'red'}}>Tweet Loading</p>}
+        {!tweetLoading && <div className={styles['tweet-content']}>
             {tweetData && <div className={`${styles['tweet-nav']} row`}>
                 <div className={styles['back-icon']}>
                     <span className={`${styles['back-symbol']} material-symbols-outlined center`}>arrow_back</span>
@@ -201,7 +206,7 @@ const TweetPage = ({dataFromModal}) => {
             </div>
             {/* LOAD COMMENTS */}
 
-        </div>
+        </div>}
     </>
     )
 }

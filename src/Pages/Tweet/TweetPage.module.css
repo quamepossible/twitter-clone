@@ -143,12 +143,13 @@
 
 .comm-input{
   width: 100%;
-  padding: 25px 5px;
+  padding: 20px 5px;
   background-color: black;
   border: none;
   outline: none !important;
   color: white;
   font-size: 21px;
+  /* border:1px solid red; */
 }
 
 .comm-input::placeholder{

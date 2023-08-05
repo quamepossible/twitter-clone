@@ -41,3 +41,7 @@ a{
   background-color: var(--pendingblue);
   color: var(--pendingtext);
 }
+
+body.overlay-open{
+  overflow: hidden;
+}

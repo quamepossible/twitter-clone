@@ -1,0 +1,154 @@
+.login-modal {
+  width: 100%;
+  height: 100vh;
+  margin: auto;
+  background-color: rgba(91, 112, 131, 0.4);
+  font-family: "Geologica", sans-serif;
+}
+
+.modal-content {
+  width: 580px;
+  height: 650px;
+  background-color: black;
+  z-index: 40;
+  border-radius: 25px;
+  overflow: hidden;
+}
+
+.login-logo {
+  height: 60px;
+  position: relative;
+}
+
+.close-login {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  left: 40px;
+  top: 15px;
+  color: white;
+  padding: 10px;
+  transition: 0.2s;
+  cursor: pointer;
+  /* background-color: blue; */
+}
+
+.close-login:hover {
+  background-color: var(--offblack);
+}
+
+.logo {
+  width: 40px;
+  display: block;
+  margin: 10px auto;
+}
+
+.login-sec {
+  width: 350px;
+  height: 560px;
+  margin: auto;
+}
+
+.sign-text {
+  font-size: 28px;
+  font-weight: bold;
+  width: 300px;
+  margin: auto;
+  font-family: "Geologica", sans-serif;
+}
+
+.google-sign {
+  width: 300px;
+  text-align: center;
+  padding: 10px 0;
+  margin: 20px auto;
+  border-radius: 50px;
+  background-color: white;
+  color: black;
+}
+
+.alt {
+  height: 40px;
+  position: relative;
+}
+
+.line {
+  width: 300px;
+  border-bottom: 1px solid var(--bordergray);
+}
+
+.or {
+  width: 40px;
+  height: 40px;
+}
+
+.or span {
+  background-color: black;
+  display: block;
+  padding: 5px;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.login-form {
+  display: block;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+}
+
+.login-form input {
+  display: block;
+  width: 300px;
+  height: 55px;
+  border: 5px;
+  outline: none !important;
+  margin: 20px auto;
+  border-radius: 5px;
+  padding: 0 10px;
+  border: 1px solid var(--bordergray);
+  background-color: black;
+  color: white;
+}
+
+.login-form button {
+  display: block;
+  width: 300px;
+  border-radius: 50px;
+  margin: auto;
+  border: 1px solid black;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.sign-btn {
+  background-color: white;
+  color: black;
+}
+
+.login-form .forgot-btn {
+  background-color: black;
+  color: white;
+  margin-top: 20px;
+  border: 1px solid var(--graytext);
+}
+
+.sign-up {
+  width: 300px;
+  margin: auto;
+  /* background-color: red; */
+  margin-top: 10px;
+  font-weight: 100;
+  color: var(--graytext)
+}
+
+.sign-up a{
+    color: var(--twitterblue);
+}
+
+.sign-up a:hover{
+    text-decoration: underline;
+}

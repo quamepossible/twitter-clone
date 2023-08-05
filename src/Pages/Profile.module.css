@@ -4,9 +4,15 @@
 
 .profile-header{
   width: 100%;
-  height: 470px;
+  height: auto;
   border-bottom: 1px solid var(--bordergray);
-  /* background-color: red; */
+  /* background-color: blue; */
+}
+
+.hold-header-content{
+  height: auto;
+  position: relative;
+  /* background-color: green; */
 }
 
 .header-nav{
@@ -55,14 +61,14 @@
   color: var(--graytext)
 }
 
-.hold-header-content{
-  position: relative;
-}
-
-.cover-photo, .profile-data{
+.cover-photo{
   height: 210px;
 }
 
+.profile-data{
+  /* height: auto; */
+  /* background-color: yellow; */
+}
 .cover-photo, .profile-photo{
   background-position: center;
   background-size: cover;
@@ -70,8 +76,9 @@
 
 .profile-photo{
   display: inline-block;
-  position: absolute;
-  top: 50%;
+  position: relative;
+  margin-bottom: -120px;
+  top: 43%;
   left:15%;
   transform: translate(-50%, -50%);
   width: 140px;
@@ -83,6 +90,7 @@
 .edit-profile{
   text-align: right;
   padding: 15px;
+  margin-top: -30px;
 }
 
 .edit-profile span{
@@ -92,8 +100,10 @@
 }
 
 .hold-profile-data{
-  margin-top: 40px;
+  margin-top: 30px;
   padding-left: 20px;
+  height: auto;
+  /* background-color: blue; */
 }
 
 .profile-name{
@@ -144,11 +154,13 @@
 
 .profile-nav{
   width: 100%;
-  margin-top: 11px;
+  height: auto;
+  margin-top: 20px;
+  /* background-color: red; */
 }
 
 .each-nav{
-  padding: 20px 31.5px;
+  padding: 15px 31.5px;
   margin: auto;
   transition: 0.2s;
 }

@@ -2,7 +2,7 @@ import { Outlet, NavLink } from 'react-router-dom';
 
 import styles from './Profile.module.css';
 import coverImg from '../Assets/cover.jpeg';
-import dpImg from '../Assets/profilepic.jpg';
+import dpImg from '../Assets/avatar.png';
 
 const Profile = () => {
     return (
