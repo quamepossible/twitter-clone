@@ -1,8 +1,10 @@
+import { useLoaderData } from 'react-router';
 import Tweet from "../../Components/Tweets/Tweet";
-const Tweets = ({tweetPostData}) => {
+const Tweets = () => {
+  const getAllTweets = useLoaderData();
     return (
         <>
-        {tweetPostData.map((tweet, i) => <Tweet key={i} tweetData={tweet} />)}
+        {getAllTweets.map((tweet, i) => <Tweet key={i} tweetData={tweet} />)}
         </>
     )
 }

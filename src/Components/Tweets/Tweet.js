@@ -9,7 +9,7 @@ import defaultMedia from '../../Assets/media/malone.jpg'
 import useImgDimHook from "../../Hooks/ImageDimHook";
 
 const Tweet = ({ tweetData }) => {
-  const {full_name, username, comments, tweet_caption, author_id, retweets, likes, views, datePosted, media, media_url } = tweetData;
+  const {comments, tweet_caption, author_id, tweet_id, retweets, likes, views, full_date, media, media_url } = tweetData;
   // const tweetMedia = media ? mediaURL : '';
   
   //  initialize a ref, and adjust the dimenstions (width and height) of the tweet's 
@@ -18,7 +18,7 @@ const Tweet = ({ tweetData }) => {
   useImgDimHook(mediaRef, media_url);
 
   // url to open tweet on a full page
-  const tweetPath = `/profile/status/${author_id}`;
+  const tweetPath = `/${author_id}/status/${tweet_id}`;
 
   // TWEET ACTIONS ARRAY
   const commentsActionArr = [[comments.length, 'chatbubbles-outline'], [retweets, 'git-compare-outline'], [likes, 'heart-outline'], [views, 'stats-chart']];

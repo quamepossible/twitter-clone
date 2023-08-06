@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import ModalProvider from "./Context/ModalProvider";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomeRouter from "./HomeRouter";
@@ -13,11 +12,17 @@ import Highlights from "./Pages/Profile/Highlights";
 import Media from "./Pages/Profile/Media";
 import Likes from "./Pages/Profile/Likes";
 
+// import utility functions
+import { tweetsLoader, singleTweetLoader, eachProfileTweetsLoader } from "./util/tweets-fetch";
+
 // single tweet page
-import TweetPage from "./Pages/Tweet/TweetPage";
+import TweetPage, {TweetPageError} from "./Pages/Tweet/TweetPage";
 
 // MEDIA MODAL
 import MediaModal from "./Pages/Modal/MediaModal";
+
+// LOGIN MODAL
+import Login from "./Components/LoginModal/Login";
 
 // ERROR 404
 import Error404 from "./Pages/Error/404";
@@ -62,28 +67,6 @@ const tweetPostData = [
 ];
 
 function App() {
-  const [allTweets, setAllTweets] = useState([]);
-
-  useEffect(() => {
-    const fetchTweets = async() => {
-      try{
-        const tweetsRes = await fetch(process.env.REACT_APP_FETCH_TWEETS);
-        if(!tweetsRes.ok) throw new Error('fetch failed');
-        return tweetsRes.json();
-      } catch(err) {
-        return {status: 'failed'}
-      }
-    }
-    fetchTweets().then(tweets => {
-      if(tweets.status){
-        console.log(tweets.status);
-      }
-      else{
-        setAllTweets(tweets)
-      }
-    });
-
-  }, [])
 
   const router = createBrowserRouter([
     {
@@ -91,12 +74,16 @@ function App() {
       element: <HomeRouter />,
       errorElement: <Error404 />,
       children: [
-        { index: true, element: <Home tweetPostData={allTweets} /> },
+        { 
+          index: true, 
+          element: <Home />,
+          loader: tweetsLoader,
+        },
         {
-          path: "profile",
+          path: ":username",
           element: <Profile />,
           children: [
-            { index: true, element: <Tweets tweetPostData={allTweets} /> },
+            { index: true, element: <Tweets />, loader: eachProfileTweetsLoader },
             { path: "replies", element: <Replies /> },
             { path: "highlights", element: <Highlights /> },
             { path: "media", element: <Media /> },
@@ -104,23 +91,24 @@ function App() {
           ],
         },
         {
-          path: "profile/status/:id",
+          path: ":username/status/:id",
           id: 'status',
           children: [
             {
               index: true,
               element: <TweetPage />,
-              loader: function ({ _, params }) {
-                // fetch and return the tweet data of the tweet with using the slug provided at (:id)
-                const getTweetById = allTweets.filter((tweet) => tweet.author_id === params.id);
-                return getTweetById[0];
-              },
+              errorElement: <TweetPageError />,
+              loader: singleTweetLoader,
             },
             { path: "photo/:num", element: <MediaModal defaultModalState={true} /> },
           ],
         },
       ],
     },
+    {
+      path: 'auth',
+      element: <Login/>
+    }
   ]);
 
   console.log('App running');

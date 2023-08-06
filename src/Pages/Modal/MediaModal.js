@@ -1,4 +1,5 @@
 import { useEffect, useContext, useRef } from 'react';
+import { useNavigation } from 'react-router';
 import { createPortal } from 'react-dom';
 
 import TweetPage from '../Tweet/TweetPage';
@@ -11,22 +12,19 @@ const Modal = ({modalActions}) => {
     const {modalState, activeStatusID, tweetComments, theTweetData} = modalDataInfo;
 
     useEffect(() => {
-        console.log(theTweetData);
+        // console.log(theTweetData);
 
         if(modalState){        
-            // Store the current scroll position
-                // This prevents section of overlay from getting hidden in viewport
-            const scrollTop = window.scrollY || document.documentElement.scrollTop;
-            document.querySelector('#media-modal').style.marginTop = `-${scrollTop}px`;
-            document.body.style.overflow = 'hidden'
+            document.getElementById('root').style.height='100vh';
+            document.getElementById('root').style.overflow='hidden';
         }
     }, [modalState, activeStatusID])
 
     const closeModal = () => {
         onCloseModal();
         window.history.back();
-        document.body.style.overflow = '';
-        // console.log('close modal');
+        document.getElementById('root').style.height='auto';
+        document.getElementById('root').style.overflow='auto';
     }
 
     return ((
@@ -45,14 +43,18 @@ const Modal = ({modalActions}) => {
 }
 
 const MediaModal = ({defaultModalState}) => {
+    const nav = useNavigation();
+    const tweetModalLoading = nav.state === 'loading';
+
     const ModalActions = useContext(ModalCtx);
     const { modalDataInfo } = ModalActions;
     const {modalState} = modalDataInfo;
     console.log('modal state => ' + modalDataInfo.modalState);
     return(
         <>
+        {tweetModalLoading && <p>Modal Loading</p>}
         {modalState && createPortal(<Modal modalActions={ModalActions} />, document.getElementById('media-modal'))}
-        {!modalState && <p>Page not found</p>}
+        {/* {!modalState && <p>Page not found</p>} */}
         </>
     )
 

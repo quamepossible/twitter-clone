@@ -1,5 +1,5 @@
 import { useRef, useContext } from 'react';
-import { Link, useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData, useNavigation } from 'react-router-dom';
 
 import { ModalCtx } from '../../Context/ModalProvider';
 import useImgDimHook from '../../Hooks/ImageDimHook';
@@ -11,14 +11,24 @@ import Boogie from '../../Assets/media/posty.jpg';
 import styles from './TweetPage.module.css';
 import mediaStyle from '../Modal/ModalLayout.module.css';
 
+export const TweetPageError = () => {
+    return <p>Error Loading Single Tweet</p>
+}
+
 const TweetPage = ({dataFromModal}) => {
+    const theNav = useNavigation();
+    const tweetLoading = theNav.state === 'loading';
+    console.log(theNav.state);
+
+
     const ModalActions = useContext(ModalCtx);
     const { onOpenModal } = ModalActions;
     // const {modalState, activeStatusID, comments: tweetComments} = modalDataInfo;
 
-    let  id, full_name, username, tweet_caption, comments, retweets, likes, views, datePosted, timePosted, media_url, media, location;
+    let  id, tweet_id, full_name, username, tweet_caption, comments, retweets, likes, views, datePosted, timePosted, media_url, media, location;
     if(dataFromModal){
         id = dataFromModal.author_id;
+        tweet_id = dataFromModal.tweet_id;
         full_name = "Kwame Appiah";
         username = "_mission";
         tweet_caption = dataFromModal.tweet_caption;
@@ -37,6 +47,7 @@ const TweetPage = ({dataFromModal}) => {
     if(tweetData){
         // { id, full_name, username, tweet_caption, comments, retweets, likes, views, datePosted, timePosted, mediaURL, media, location } = tweetData;
         id = tweetData.author_id;
+        tweet_id = tweetData.tweet_id;
         full_name = "Kwame Appiah";
         username = "_mission";
         tweet_caption = tweetData.tweet_caption;
@@ -77,7 +88,7 @@ const TweetPage = ({dataFromModal}) => {
     }
 
     // URL to tweet's modal component
-    const modalURL = `/profile/status/${id}/photo/1`;
+    const modalURL = `/${id}/status/${tweet_id}/photo/1`;
 
     // TWEET'S ACTIONS SECTION
     const actionIcons = [["chatbubbles-outline"], ["git-compare-outline"],["heart-outline"],["bookmark-outline"],["share-outline"],];
@@ -85,115 +96,118 @@ const TweetPage = ({dataFromModal}) => {
 
     // const whatClass = tweetData ? 
     return(
-    <div className={styles['tweet-content']}>
-        {tweetData && <div className={`${styles['tweet-nav']} row`}>
-            <div className={styles['back-icon']}>
-                <span className={`${styles['back-symbol']} material-symbols-outlined center`}>arrow_back</span>
+        <>
+        {tweetLoading && <p style={{color: 'red'}}>Tweet Loading</p>}
+        {!tweetLoading && <div className={styles['tweet-content']}>
+            {tweetData && <div className={`${styles['tweet-nav']} row`}>
+                <div className={styles['back-icon']}>
+                    <span className={`${styles['back-symbol']} material-symbols-outlined center`}>arrow_back</span>
+                </div>
+                <div className={styles['about']}>
+                    <p className={`${styles['about-name']} center`}>Tweet</p>
+                </div>
+            </div>}
+
+            {/* TWEET AUTHOR INFO AND CAPTION */}
+            <div className={`${tweetData ? styles['author-details'] : mediaStyle['author-details']} row`}>
+                <div className={tweetData ? styles['author-photo'] : mediaStyle['author-photo']}>
+                    <div style={{backgroundImage: `url(${Posty}`}} className={tweetData ? styles['comm-pic'] : mediaStyle['comm-pic']} />
+                </div>
+                <div className={tweetData ? styles['author-names'] : mediaStyle['author-names']}>
+                    <p>{full_name}</p>
+                    <p className={tweetData ? styles['author-username'] : mediaStyle['author-username']}>@<span>{username}</span></p>
+                </div>
+                <div className={tweetData ? styles['tweet-menu'] : mediaStyle['tweet-menu']}>
+                    <ion-icon style={{color: '#71767b'}} name="ellipsis-horizontal"></ion-icon>
+                </div>
             </div>
-            <div className={styles['about']}>
-                <p className={`${styles['about-name']} center`}>Tweet</p>
+            <div className={tweetData ? styles['tweet-caption'] : mediaStyle['tweet-caption']}>
+                <p className={tweetData ? styles['tweet-text'] : mediaStyle['tweet-text']}>{tweet_caption}</p>
             </div>
+            {/* TWEET AUTHOR INFO AND CAPTION */}
+
+
+            {/* TWEET MEDIA IF AVAILABLE */}
+            {media && tweetData &&
+                // this is the media section of the visited tweet
+                    // when clicked, we send tweet data to the modal context
+                    // then, the tweet modal opens
+                <Link onClick={openModal} to={modalURL}>
+                    <div className={styles['tweet-media']}>
+                        <div ref={mediaRef} className={styles['tweet-main-media']} style={{backgroundImage: `url(${media_url})`}}></div>
+                    </div>
+                </Link>
+            }
+            {/* TWEET MEDIA IF AVAILABLE */}
+
+            {/* TWEET AUTHOR LOCATION AND DATE */}
+            <div className={tweetData ? styles['tweet-info'] : mediaStyle['tweet-info']}>
+                <p className='center'>
+                    <span>{timePosted}</span>
+                    <span className={styles['hold-dot']}>
+                        <span className={`${styles['dot']} center`}></span>
+                    </span>
+                    <span>{datePosted}</span> from
+                    <span> {location} </span>
+                    <span className={styles['hold-dot']}>
+                        <span className={`${styles['dot']} center`}></span>
+                    </span>
+                    <span style={{color: 'white'}}><b>{views}</b></span> Views
+                </p>
+            </div>
+            {/* TWEET AUTHOR LOCATION AND DATE */}
+
+
+            {/* TWEET INSIGHT */}
+            <div className={styles['tweet-insight']}>
+                <div className={`${styles['hold-insight']} center row`}>
+                    <div><span><b>{retweets}</b></span> Retweets</div>
+                    <div><span><b>0</b></span> Quote</div>
+                    <div><span><b>{likes}</b></span> Likes</div>
+                </div>
+            </div>
+            {/* TWEET INSIGHT */}
+
+
+            {/* TWEET ACTION SECTION */}
+            <div className={`${styles['tweet-action']} row`}>
+                {actionIcons.map((action, i) => (
+                    <div className={styles['action-div']} key={i}>
+                        <ion-icon style={{fontSize: '25px'}} name={action[0]}></ion-icon>
+                    </div>
+                ))}
+            </div>
+            {/* TWEET ACTION SECTION */} 
+
+            {/* ADD COMMENT TO TWEET */}
+            <div className={`${styles['add-tweet-comment']} row`}>
+                <div className={tweetData ? styles['composer-pic'] : mediaStyle['composer-pic']}>
+                    <div className={`${tweetData? styles['add-com-pic'] : mediaStyle['add-com-pic']} center`} style={{backgroundImage: `url(${Boogie})`}}></div>
+                </div>
+                <div className={tweetData ? styles['composer-form'] : mediaStyle['composer-form']}>
+                    <form className='center'>
+                        <input type='text' className={styles['comm-input']} placeholder='Tweet your reply!' />
+                    </form>
+                </div>
+                <div className={tweetData ? styles['reply-btn'] : mediaStyle['reply-btn']}>
+                    <button type='button' className={`${styles['submit-btn']} center pending-button`}>Reply</button>
+                </div>
+            </div>
+            {/* ADD COMMENT TO TWEET */}
+
+
+            {/* LOAD COMMENTS */}
+            <div className={styles['comments']}>
+                {/* if clicked tweet doesn't contain any comments, output 'No comments' */}
+                {!(loadComments.length) && <p style={{textAlign: 'center', fontSize: '24px', marginTop: '50px'}}>No comments</p>}
+                
+                {/* Clicked Media has comments, so render all comments from loadComments */}
+                {loadComments}
+            </div>
+            {/* LOAD COMMENTS */}
+
         </div>}
-
-        {/* TWEET AUTHOR INFO AND CAPTION */}
-        <div className={`${tweetData ? styles['author-details'] : mediaStyle['author-details']} row`}>
-            <div className={tweetData ? styles['author-photo'] : mediaStyle['author-photo']}>
-                <div style={{backgroundImage: `url(${Posty}`}} className={tweetData ? styles['comm-pic'] : mediaStyle['comm-pic']} />
-            </div>
-            <div className={tweetData ? styles['author-names'] : mediaStyle['author-names']}>
-                <p>{full_name}</p>
-                <p className={tweetData ? styles['author-username'] : mediaStyle['author-username']}>@<span>{username}</span></p>
-            </div>
-            <div className={tweetData ? styles['tweet-menu'] : mediaStyle['tweet-menu']}>
-                <ion-icon style={{color: '#71767b'}} name="ellipsis-horizontal"></ion-icon>
-            </div>
-        </div>
-        <div className={tweetData ? styles['tweet-caption'] : mediaStyle['tweet-caption']}>
-            <p className={tweetData ? styles['tweet-text'] : mediaStyle['tweet-text']}>{tweet_caption}</p>
-        </div>
-        {/* TWEET AUTHOR INFO AND CAPTION */}
-
-
-        {/* TWEET MEDIA IF AVAILABLE */}
-        {media && tweetData &&
-            // this is the media section of the visited tweet
-                // when clicked, we send tweet data to the modal context
-                // then, the tweet modal opens
-            <Link onClick={openModal} to={modalURL}>
-                <div className={styles['tweet-media']}>
-                    <div ref={mediaRef} className={styles['tweet-main-media']} style={{backgroundImage: `url(${media_url})`}}></div>
-                </div>
-            </Link>
-        }
-        {/* TWEET MEDIA IF AVAILABLE */}
-
-        {/* TWEET AUTHOR LOCATION AND DATE */}
-        <div className={tweetData ? styles['tweet-info'] : mediaStyle['tweet-info']}>
-            <p className='center'>
-                <span>{timePosted}</span>
-                <span className={styles['hold-dot']}>
-                    <span className={`${styles['dot']} center`}></span>
-                </span>
-                <span>{datePosted}</span> from
-                <span> {location} </span>
-                <span className={styles['hold-dot']}>
-                    <span className={`${styles['dot']} center`}></span>
-                </span>
-                <span style={{color: 'white'}}><b>{views}</b></span> Views
-            </p>
-        </div>
-        {/* TWEET AUTHOR LOCATION AND DATE */}
-
-
-        {/* TWEET INSIGHT */}
-        <div className={styles['tweet-insight']}>
-            <div className={`${styles['hold-insight']} center row`}>
-                <div><span><b>{retweets}</b></span> Retweets</div>
-                <div><span><b>0</b></span> Quote</div>
-                <div><span><b>{likes}</b></span> Likes</div>
-            </div>
-        </div>
-        {/* TWEET INSIGHT */}
-
-
-        {/* TWEET ACTION SECTION */}
-        <div className={`${styles['tweet-action']} row`}>
-            {actionIcons.map((action, i) => (
-                <div className={styles['action-div']} key={i}>
-                    <ion-icon style={{fontSize: '25px'}} name={action[0]}></ion-icon>
-                </div>
-            ))}
-        </div>
-        {/* TWEET ACTION SECTION */} 
-
-        {/* ADD COMMENT TO TWEET */}
-        <div className={`${styles['add-tweet-comment']} row`}>
-            <div className={tweetData ? styles['composer-pic'] : mediaStyle['composer-pic']}>
-                <div className={`${tweetData? styles['add-com-pic'] : mediaStyle['add-com-pic']} center`} style={{backgroundImage: `url(${Boogie})`}}></div>
-            </div>
-            <div className={tweetData ? styles['composer-form'] : mediaStyle['composer-form']}>
-                <form className='center'>
-                    <input type='text' className={styles['comm-input']} placeholder='Tweet your reply!' />
-                </form>
-            </div>
-            <div className={tweetData ? styles['reply-btn'] : mediaStyle['reply-btn']}>
-                <button type='button' className={`${styles['submit-btn']} center pending-button`}>Reply</button>
-            </div>
-        </div>
-        {/* ADD COMMENT TO TWEET */}
-
-
-        {/* LOAD COMMENTS */}
-        <div className={styles['comments']}>
-            {/* if clicked tweet doesn't contain any comments, output 'No comments' */}
-            {!(loadComments.length) && <p style={{textAlign: 'center', fontSize: '24px', marginTop: '50px'}}>No comments</p>}
-            
-            {/* Clicked Media has comments, so render all comments from loadComments */}
-            {loadComments}
-        </div>
-        {/* LOAD COMMENTS */}
-
-    </div>
+    </>
     )
 }
 
