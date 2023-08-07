@@ -1,16 +1,25 @@
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-
 
 import profilePic from "../../Assets/omar.jpg";
 import styles from "./Tweet.module.css";
-import defaultMedia from '../../Assets/media/malone.jpg'
+
+import useAuthorDetailsHook from "../../Hooks/AuthorDetailsHook";
 
 import useImgDimHook from "../../Hooks/ImageDimHook";
 
 const Tweet = ({ tweetData }) => {
-  const {comments, tweet_caption, author_id, tweet_id, retweets, likes, views, full_date, media, media_url } = tweetData;
+  const { comments, tweet_caption, author_id, tweet_id, retweets, likes, views, full_date, media, media_url } = tweetData;
   // const tweetMedia = media ? mediaURL : '';
+
+  // get author of tweet details
+  // useEffect(() => {
+  //   fetch(`http://localhost:3005/author-details/${author_id}`).then(res=>res.json()).then(res => {
+  //     setDetails(res);
+  //   });
+  // }, [author_id])
+  const details = useAuthorDetailsHook(author_id);
+
   
   //  initialize a ref, and adjust the dimenstions (width and height) of the tweet's 
     //     media (photo and video) on the home page
@@ -34,9 +43,9 @@ const Tweet = ({ tweetData }) => {
       <div className={styles["tweet-content"]}>
         {/* TWEET AUTHOR BIO, DATE TWEETED */}
         <div className={styles["author-name"]}>
-          <span className={styles["profile-name"]}>Kwame Opoku Appiah</span>{" "}
+          <span className={styles["profile-name"]}>{details.fullName}</span>{" "}
           <span className={styles["check-mark"]}></span>{" "}
-          <span className={styles["user-name"]}>@young_kay</span>{" "}
+          <span className={styles["user-name"]}>@{details.username}</span>{" "}
           <span className={`${styles['dot']}`}><span className="center" style={{display: 'inline-block', height:'30px'}}>.</span></span>
           <span className={styles['date-tweeted']}>Jul 30</span>
         </div>

@@ -12,6 +12,9 @@ import Highlights from "./Pages/Profile/Highlights";
 import Media from "./Pages/Profile/Media";
 import Likes from "./Pages/Profile/Likes";
 
+// profile settings modal
+import EditProfile from "./Pages/Settings/EditProfile";
+
 // import utility functions
 import { tweetsLoader, singleTweetLoader, eachProfileTweetsLoader } from "./util/tweets-fetch";
 
@@ -103,6 +106,13 @@ function App() {
             { path: "photo/:num", element: <MediaModal defaultModalState={true} /> },
           ],
         },
+        // {
+        //   path: 'settings/profile',
+        //   element: <Profile />,
+        //   children: [
+        //     {index: true, element: <EditProfile />}
+        //   ]
+        // }
       ],
     },
     {

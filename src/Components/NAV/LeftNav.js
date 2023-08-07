@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import { NavLink } from "react-router-dom";
+import useAuthorDetailsHook from '../../Hooks/AuthorDetailsHook';
 import styles from "./LeftNav.module.css";
 import homeIcon from "../../Assets/home.png";
 import Boogie from "../../Assets/media/boogie.jpg"
@@ -7,6 +8,8 @@ import Boogie from "../../Assets/media/boogie.jpg"
 const LeftNav = () => {
   const userIsAuthenticated = localStorage.getItem('user');
   const profile = localStorage.getItem('profile');
+  const details = useAuthorDetailsHook(profile);
+
   const activeLink = ({isActive}) => {
     const fullClassName = [styles['nav-link'], styles['active']];
     return isActive ? `${fullClassName.join(' ')} row` : `${styles["nav-link"]} row`
@@ -72,8 +75,8 @@ const LeftNav = () => {
             <div className={`${styles['user-pic']} center`} style={{backgroundImage: `url(${Boogie})`}}></div>
           </div>
           <div className={styles['user-details']}>
-            <p className={styles['user-fullname']}>Kwame Opoku - Appiah</p>
-            <p className={styles['user-name']}>@mission_quame</p>
+            <p className={styles['user-fullname']}>{details.fullName}</p>
+            <p className={styles['user-name']}>@{details.username}</p>
           </div>
           <div className={styles['log-menu']}>
             <ion-icon style={{color: ''}} name="ellipsis-horizontal"></ion-icon>

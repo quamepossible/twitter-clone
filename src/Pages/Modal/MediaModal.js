@@ -23,8 +23,8 @@ const Modal = ({modalActions}) => {
     const closeModal = () => {
         onCloseModal();
         window.history.back();
-        document.getElementById('root').style.height='auto';
-        document.getElementById('root').style.overflow='auto';
+        document.getElementById('root').style.height='100%';
+        document.getElementById('root').style.overflow='';
     }
 
     return ((
