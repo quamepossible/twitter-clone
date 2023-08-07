@@ -1,10 +1,19 @@
-import { Outlet, NavLink } from 'react-router-dom';
+import { useState } from 'react';
+import { createPortal } from 'react-dom';
+import { Outlet, NavLink, Link } from 'react-router-dom';
 
+import EditProfile from './Settings/EditProfile';
 import styles from './Profile.module.css';
 import coverImg from '../Assets/cover.jpeg';
 import dpImg from '../Assets/avatar.png';
 
 const Profile = () => {
+    const [ modalIsOpen, setModalIsOpen ] = useState(false);
+
+
+    const openEditModal = () => {
+        setModalIsOpen(true)
+    }
     return (
         <>
         <div className={styles['profile-section']}>
@@ -23,7 +32,7 @@ const Profile = () => {
                     <div className={styles['cover-photo']} style={{backgroundImage: `url(${coverImg})`}}></div>
                     <div className={styles['profile-photo']} style={{backgroundImage: `url(${dpImg})`}}></div>
                     <div className={styles['profile-data']}>
-                        <p className={styles['edit-profile']}><span>Edit profile</span></p>
+                        <p className={styles['edit-profile']}><span to="/settings/profile">Edit profile</span></p>
                         <div className={styles['hold-profile-data']}>
                             <p className={styles['profile-name']}>Young - K</p>
                             <p className={styles['user-name']}>@mission_quame</p>
