@@ -2,7 +2,7 @@
 
 const fetchAllTweets = async () => {
   try {
-    const tweetsRes = await fetch(process.env.REACT_APP_FETCH_TWEETS);
+    const tweetsRes = await fetch(`${process.env.REACT_APP_ENDPOINT}/all-tweets`);
     if (!tweetsRes.ok) throw new Error("fetch failed");
     return tweetsRes.json();
   } catch (err) {
@@ -25,7 +25,7 @@ const singleTweetLoader = async ({_, params}) => {
 
 const eachProfileTweetsLoader = async ({_, params}) => {
   try{
-    const fetchURL = `${process.env.REACT_APP_PROFILE_TWEETS}?profile=${params.username}`;
+    const fetchURL = `${process.env.REACT_APP_ENDPOINT}/profile-tweets?profile=${params.username}`;
     const fetchProfileTweets = await fetch(fetchURL);
     if(!fetchProfileTweets.ok) throw new Error ("Profile tweets fetch failed from Database");
     return fetchProfileTweets.json();
