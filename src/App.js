@@ -75,7 +75,7 @@ function App() {
     {
       path: "/",
       element: <HomeRouter />,
-      errorElement: <Error404 />,
+      // errorElement: <Error404 />,
       children: [
         { 
           index: true, 
