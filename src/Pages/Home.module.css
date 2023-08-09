@@ -71,12 +71,14 @@
 }
 
 .tweets-btns {
-  width: 250px;
+  width: 400px;
+  height: 40px;
+  overflow: hidden;
   position: relative;
 }
 
 .centered-space {
-  width: 170px;
+  /* width: 170px; */
 }
 
 .post-tweet-btn {
@@ -85,17 +87,75 @@
 }
 
 .hold-tweet-btns {
-  width: 95%;
+  width: 150px;
+  height: 100%;
+  position: relative;
+}
+
+.upl-btn{
+  display: inline-block;
+  width: 150px;
+  padding: 5px 10px;
+  padding-left: 20px;
+  border: 2px dashed var(--bluelight);
+  text-align: center;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.upl-btn:hover{
+  background-color: rgba(47, 47, 47, 0.61);
+}
+
+.media-text{
+  display: inline-block;
+  /* background-color: blue; */
+  position: relative;
+}
+
+.img-selected{
+  width: 180px;
+  height: 40px;
+  margin-left: 10px;
+  position: relative;
+}
+
+.hold-sel{
+  width: 165px;
+  border-radius: 60px;
+  overflow: hidden;
   height: auto;
 }
 
-.tweet-ico {
+.sel-ico, .sel-text{
   display: inline-block;
+  background-color: green;
+  /* height: 30px; */
+}
+
+.sel-ico{
+  width: 40px;
+  position: relative;
+  background-color: white;
+  color: green;
+}
+
+.sel-text{
+  width: 125px;
+  padding: 5px;
+}
+
+
+
+
+.tweet-ico {
+  /* display: inline-block; */
   width: 20px;
   height: 20px;
   margin-right: 17px;
   position: relative;
   color: var(--bluelight);
+  background-color: red;
 }
 
 /* center content */

@@ -33,13 +33,19 @@ a{
   transform: translate(-50%, -50%);
 }
 
-.pending-button{
+.pending-button, .valid-button{
   border: none;
   padding: 8px 20px;
   font-weight: bold;
   border-radius: 50px;
   background-color: var(--pendingblue);
   color: var(--pendingtext);
+}
+
+.valid-button{
+  background-color: var(--twitterblue);
+  color: white;
+  cursor: pointer;
 }
 
 body.overlay-open{

@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
-import profilePic from "../../Assets/omar.jpg";
+import profilePic from "../../Assets/Logo_of_Twitter.png";
 import styles from "./Tweet.module.css";
 
 import useAuthorDetailsHook from "../../Hooks/AuthorDetailsHook";
@@ -36,7 +36,7 @@ const Tweet = ({ tweetData }) => {
     <NavLink to={tweetPath} className={`${styles["tweets"]} row`}>
       {/* AUTHOR DP */}
       <div className={styles["author-photo"]}>
-        <img alt="author-dp" src={profilePic} className={styles["author-dp"]} />
+        <img alt="author-dp" src={details.dp || profilePic} className={styles["author-dp"]} />
       </div>
       {/* AUTHOR DP */}
 

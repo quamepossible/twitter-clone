@@ -75,7 +75,7 @@ function App() {
     {
       path: "/",
       element: <HomeRouter />,
-      // errorElement: <Error404 />,
+      errorElement: <Error404 />,
       children: [
         { 
           index: true, 
@@ -106,13 +106,6 @@ function App() {
             { path: "photo/:num", element: <MediaModal defaultModalState={true} /> },
           ],
         },
-        // {
-        //   path: 'settings/profile',
-        //   element: <Profile />,
-        //   children: [
-        //     {index: true, element: <EditProfile />}
-        //   ]
-        // }
       ],
     },
     {
