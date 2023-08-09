@@ -10,14 +10,7 @@ import useImgDimHook from "../../Hooks/ImageDimHook";
 
 const Tweet = ({ tweetData }) => {
   const { comments, tweet_caption, author_id, tweet_id, retweets, likes, views, full_date, media, media_url } = tweetData;
-  // const tweetMedia = media ? mediaURL : '';
 
-  // get author of tweet details
-  // useEffect(() => {
-  //   fetch(`http://localhost:3005/author-details/${author_id}`).then(res=>res.json()).then(res => {
-  //     setDetails(res);
-  //   });
-  // }, [author_id])
   const details = useAuthorDetailsHook(author_id);
 
   
