@@ -1,19 +1,16 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef } from "react";
 import { NavLink } from "react-router-dom";
 
 import profilePic from "../../Assets/Logo_of_Twitter.png";
 import styles from "./Tweet.module.css";
 
-import useAuthorDetailsHook from "../../Hooks/AuthorDetailsHook";
-
 import useImgDimHook from "../../Hooks/ImageDimHook";
 
+
+
 const Tweet = ({ tweetData }) => {
-  const { comments, tweet_caption, author_id, tweet_id, retweets, likes, views, full_date, media, media_url } = tweetData;
+  const { comments, tweet_caption, author_id, author_fullName, profile_pic, tweet_id, retweets, likes, views, full_date, media, media_url } = tweetData;
 
-  const details = useAuthorDetailsHook(author_id);
-
-  
   //  initialize a ref, and adjust the dimenstions (width and height) of the tweet's 
     //     media (photo and video) on the home page
   const mediaRef = useRef(null);
@@ -29,16 +26,16 @@ const Tweet = ({ tweetData }) => {
     <NavLink to={tweetPath} className={`${styles["tweets"]} row`}>
       {/* AUTHOR DP */}
       <div className={styles["author-photo"]}>
-        <img alt="author-dp" src={details.dp || profilePic} className={styles["author-dp"]} />
+        <img alt="author-dp" src={profile_pic || profilePic} className={styles["author-dp"]} />
       </div>
       {/* AUTHOR DP */}
 
       <div className={styles["tweet-content"]}>
         {/* TWEET AUTHOR BIO, DATE TWEETED */}
         <div className={styles["author-name"]}>
-          <span className={styles["profile-name"]}>{details.fullName}</span>{" "}
+          <span className={styles["profile-name"]}>{author_fullName}</span>{" "}
           <span className={styles["check-mark"]}></span>{" "}
-          <span className={styles["user-name"]}>@{details.username}</span>{" "}
+          <span className={styles["user-name"]}>@{author_id}</span>{" "}
           <span className={`${styles['dot']}`}><span className="center" style={{display: 'inline-block', height:'30px'}}>.</span></span>
           <span className={styles['date-tweeted']}>Jul 30</span>
         </div>

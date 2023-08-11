@@ -1,6 +1,8 @@
-import { useState, useRef } from "react";
+import { useContext } from "react";
 import { createPortal } from "react-dom";
 import { useSearchParams, Link } from "react-router-dom";
+
+import { TweetsContext } from "../../Context/TweetsProvider";
 
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -9,9 +11,12 @@ import styles from "./Login.module.css";
 import logo from "../../Assets/home.png";
 
 const LoginModal = () => {
+  const { loggin } = useContext(TweetsContext);
+
   const [searchParams] = useSearchParams();
   const currentAction = searchParams.get("action");
   const signIn = currentAction === "login";
+
   if (currentAction !== "login" && currentAction !== "signup")
     window.location.href = "/";
   const nextActionLink = signIn ? "signup" : "login";
@@ -40,10 +45,11 @@ const LoginModal = () => {
       const theResponse = await requestRes.json();
       if(theResponse?.userToken) { // sign-up / log-in authenticated successfully
         const { userToken, profile } = theResponse;
-        console.log(userToken);
+        const { username } = profile;
         // set up localstorage for token
         localStorage.setItem('user', userToken);
-        localStorage.setItem('profile', profile);
+        localStorage.setItem('profile', username);
+        loggin(profile)
         console.log(profile);
       }
       if(theResponse?.status){ // failed sign-up / log-in

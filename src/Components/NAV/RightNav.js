@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "./RightNav.module.css";
 
 
@@ -64,4 +65,4 @@ const RightNav = () => {
   );
 };
 
-export default RightNav;
+export default React.memo(RightNav);

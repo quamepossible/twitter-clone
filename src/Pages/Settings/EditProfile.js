@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { TweetsContext } from "../../Context/TweetsProvider";
+
+
+
 import coverImg from "../../Assets/cover.jpeg";
-import dpImg from "../../Assets/avatar.png";
 import styles from "./EditProfile.module.css";
 
 import { useFormik } from "formik";
@@ -9,6 +12,8 @@ import * as Yup from "yup";
 const EditProfile = ({ closeModal, bio }) => {
   const [selectedImg, setSelectedImg] = useState(null);
   const [virtualForm, setVirtualForm] = useState(null);
+  const [savingData, setSavingData] = useState(false);
+  const { updateProfile, updateAllTweets } = useContext(TweetsContext)
 
   // get username from local storage
   const loggedUser = localStorage.getItem("profile");
@@ -38,8 +43,8 @@ const EditProfile = ({ closeModal, bio }) => {
 
   const formik = useFormik({
     initialValues: {
-      name: bio.fullName,
-      bio: bio.bio,
+      name: bio.full_name,
+      bio: bio.bio_caption,
       location: bio.location,
     },
     validationSchema: Yup.object({
@@ -64,7 +69,12 @@ const EditProfile = ({ closeModal, bio }) => {
       // there are errors on the form
       return;
     }
-    console.log("form clean");
+
+    if(savingData) {
+      return;
+    }
+    setSavingData(true);
+    console.log("saving won't run");
 
     const bioForm = document.getElementById("profile-edit-form");
     const bioData = new FormData(bioForm);
@@ -84,8 +94,26 @@ const EditProfile = ({ closeModal, bio }) => {
       method: "POST",
       body: fullForm,
     })
-      .then((res) => res.text())
-      .then((res) => console.log(res));
+      .then((res) => res.json())
+      .then((res) => {
+        const { status, response } = res;
+        console.log(status);
+        if(status === 'updated'){
+          setSavingData(false);
+          const { username, full_name, profile_pic } = response;
+          const profileObj = {
+            author: username,
+            update: {
+              author_fullName: full_name,
+              profile_pic
+            }
+          }
+          updateProfile(response);
+          updateAllTweets(profileObj);
+          handleCloseModal();
+
+        }
+      });
   };
 
   return (
@@ -105,8 +133,8 @@ const EditProfile = ({ closeModal, bio }) => {
             <p className="center">Edit profile</p>
           </div>
           <div className={styles["save-modal"]}>
-            <button className="center" type="button" onClick={submitForms}>
-              Save
+            <button className="center" style={savingData ? {backgroundColor: 'red', cursor: 'not-allowed'} : {}} type="button" onClick={submitForms}>
+              {savingData ? 'Saving...' : 'Save'}
             </button>
           </div>
         </div>
@@ -117,7 +145,7 @@ const EditProfile = ({ closeModal, bio }) => {
           ></div>
           <div
             className={styles["profile-photo"]}
-            style={{ backgroundImage: `url(${selectedURL || bio.dp})` }}
+            style={{ backgroundImage: `url(${selectedURL || bio.profile_pic})` }}
           >
             <div className={styles["photo-overlay"]}></div>
             <label

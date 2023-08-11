@@ -9,7 +9,7 @@ import { ModalCtx } from '../../Context/ModalProvider';
 
 const Modal = ({modalActions}) => {
     const { modalDataInfo, onCloseModal } = modalActions;
-    const {modalState, activeStatusID, tweetComments, theTweetData} = modalDataInfo;
+    const {modalState, activeStatusID, modalImg} = modalDataInfo;
 
     useEffect(() => {
         // console.log(theTweetData);
@@ -33,11 +33,11 @@ const Modal = ({modalActions}) => {
             <div className={`${styles['back-drop']}`} onClick={closeModal}></div>
             <div className={`${styles['comment-section']}`}>
                 <div className={styles['hold-comments']}>
-                    <TweetPage dataFromModal={theTweetData} />
+                    <TweetPage dataFromModal={true} />
                 </div>
             </div>
         </div>
-        <div className={styles['modal-media']} style={{backgroundImage: `url(${theTweetData.media_url})`}}></div>
+        <div className={styles['modal-media']} style={{backgroundImage: `url(${modalImg})`}}></div>
         </>
     ))
 }

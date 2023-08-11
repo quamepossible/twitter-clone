@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { createPortal } from 'react-dom';
 import { Outlet, NavLink, Link, useParams } from 'react-router-dom';
 
+import { TweetsContext } from '../Context/TweetsProvider';
 import useAuthorDetailsHook from '../Hooks/AuthorDetailsHook';
 import EditProfile from './Settings/EditProfile';
 import styles from './Profile.module.css';
@@ -9,11 +10,13 @@ import coverImg from '../Assets/cover.jpeg';
 import dpImg from '../Assets/Logo_of_Twitter.png';
 
 const Profile = () => {
+    console.log('profile');
     const [ modalIsOpen, setModalIsOpen ] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const { profileData } = useContext(TweetsContext);
 
     const profileUsername = useParams().username;
-    const details = useAuthorDetailsHook(profileUsername);
+    useAuthorDetailsHook(profileUsername);
 
     // check if user is Logged in
     const isLoggedInDetails = localStorage.getItem('profile');
@@ -23,10 +26,12 @@ const Profile = () => {
         if(isLoggedInDetails === profileUsername){
             setIsLoggedIn(true)
         }
+        else{
+            setIsLoggedIn(false)
+        }
     }, [isLoggedInDetails, profileUsername])
 
-    const dp = details.dp || dpImg;
-    console.log(dp);
+    const dp = profileData.profile_pic || dpImg;
 
     const openEditModal = () => {
         setModalIsOpen(true);
@@ -41,8 +46,8 @@ const Profile = () => {
                     <span className={`${styles['back-symbol']} material-symbols-outlined center`}>arrow_back</span>
                 </div>
                 <div className={styles['about']}>
-                    <p className={styles['about-name']}>{details.fullName}</p>
-                    <p className={styles['tweets-num']}><span>{details.tweets_total}</span> Tweets</p>
+                    <p className={styles['about-name']}>{profileData.full_name}</p>
+                    <p className={styles['tweets-num']}><span>{profileData.tweets_total}</span> Tweets</p>
                 </div>
             </div>
 
@@ -55,9 +60,9 @@ const Profile = () => {
                     <div className={styles['profile-data']}>
                         {isLoggedIn && <p className={styles['edit-profile']}><span onClick={openEditModal}>Edit profile</span></p>}
                         <div className={styles['hold-profile-data']}>
-                            <p className={styles['profile-name']}>{details.fullName}</p>
-                            <p className={styles['user-name']}>@{details.username}</p>
-                            <p style={{margin: '15px 0'}}>{details.bio}</p>
+                            <p className={styles['profile-name']}>{profileData.full_name}</p>
+                            <p className={styles['user-name']}>@{profileData.username}</p>
+                            <p style={{margin: '15px 0'}}>{profileData.bio_caption}</p>
                             
                             <div className={`${styles['bio']} row`}>
                                 <div className={`${styles['location-div']} row`}>
@@ -65,7 +70,7 @@ const Profile = () => {
                                         <span className="material-symbols-outlined center">location_on</span>
                                     </div>
                                     <div className={styles['hold-location']}>
-                                        <span className={styles['city']}>{details.location}</span>
+                                        <span className={styles['city']}>{profileData.location}</span>
                                     </div>
                                 </div>
 
@@ -74,14 +79,14 @@ const Profile = () => {
                                         <span className="material-symbols-outlined center">calendar_month</span>
                                     </div>
                                     <div className={styles['date-section']}>
-                                        <span>{details.date_joined}</span>                          
+                                        <span>{profileData.date_joined}</span>                          
                                     </div>
                                 </div>
                             </div>
 
                             <div className={`${styles['audience']} row`}>
-                                <span className={styles['following']}><span className={styles['fol-num']}>{details.following}</span>Following</span>
-                                <span className={styles['followers']}><span className={styles['fol-num']}>{details.followers}</span>Followers</span>
+                                <span className={styles['following']}><span className={styles['fol-num']}>{profileData.following}</span>Following</span>
+                                <span className={styles['followers']}><span className={styles['fol-num']}>{profileData.followers}</span>Followers</span>
                             </div>
                         </div>
 
@@ -97,10 +102,10 @@ const Profile = () => {
                 </div>
             </div>
             <Outlet />
-            {modalIsOpen && createPortal(<EditProfile closeModal={setModalIsOpen} bio={details}/>, document.getElementById("edit-profile-modal"))}
+            {modalIsOpen && createPortal(<EditProfile closeModal={setModalIsOpen} bio={profileData}/>, document.getElementById("edit-profile-modal"))}
         </div>     
         </>
     )
 }
 
-export default  Profile;
+export default React.memo(Profile);

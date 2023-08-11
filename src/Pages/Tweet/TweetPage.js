@@ -1,11 +1,11 @@
 import { useRef, useContext } from 'react';
-import { Link, useLoaderData, useNavigation } from 'react-router-dom';
+import { Link, useLoaderData, useNavigation, useParams } from 'react-router-dom';
 
 import { ModalCtx } from '../../Context/ModalProvider';
+import { TweetsContext } from '../../Context/TweetsProvider';
 import useImgDimHook from '../../Hooks/ImageDimHook';
 import Comments from './Comments';
 
-import Posty from '../../Assets/media/posty.jpg';
 import Boogie from '../../Assets/media/posty.jpg';
 
 import styles from './TweetPage.module.css';
@@ -16,40 +16,32 @@ export const TweetPageError = () => {
 }
 
 const TweetPage = ({dataFromModal}) => {
+    console.log(dataFromModal);
+    const tweetSlug = useParams().id;
+    console.log(tweetSlug);
+
     const theNav = useNavigation();
     const tweetLoading = theNav.state === 'loading';
-    console.log(theNav.state);
 
 
     const ModalActions = useContext(ModalCtx);
     const { onOpenModal } = ModalActions;
+
+    const fetchTweetsCtx = useContext(TweetsContext);
+    const { all_tweets } = fetchTweetsCtx;
+    const tweetData = all_tweets.filter((tweet) => tweet.tweet_id === tweetSlug)[0];
+    
+
     // const {modalState, activeStatusID, comments: tweetComments} = modalDataInfo;
 
-    let  id, tweet_id, full_name, username, tweet_caption, comments, retweets, likes, views, datePosted, timePosted, media_url, media, location;
-    if(dataFromModal){
-        id = dataFromModal.author_id;
-        tweet_id = dataFromModal.tweet_id;
-        full_name = "Kwame Appiah";
-        username = "_mission";
-        tweet_caption = dataFromModal.tweet_caption;
-        comments = dataFromModal.comments;
-        retweets = dataFromModal.retweets;
-        likes = dataFromModal.likes;
-        views = dataFromModal.views;
-        datePosted = "Jul 27";
-        timePosted = "10:45 AM";
-        media = false;
-        media_url = dataFromModal.media_url
-        location = "Kumasi, Ghana";
-    }
+    let  id, tweet_id, full_name, username, dp, tweet_caption, comments, retweets, likes, views, datePosted, timePosted, media_url, media, location;
     // get the data of the clicked tweet from the loader function on path '/profile/status/:id'
-    const tweetData = useLoaderData();
     if(tweetData){
-        // { id, full_name, username, tweet_caption, comments, retweets, likes, views, datePosted, timePosted, mediaURL, media, location } = tweetData;
         id = tweetData.author_id;
         tweet_id = tweetData.tweet_id;
-        full_name = "Kwame Appiah";
-        username = "_mission";
+        full_name = tweetData.author_fullName;
+        username = tweetData.author_id;
+        dp = tweetData.profile_pic;
         tweet_caption = tweetData.tweet_caption;
         comments = tweetData.comments;
         retweets = tweetData.retweets;
@@ -62,7 +54,7 @@ const TweetPage = ({dataFromModal}) => {
         location = "Kumasi, Ghana";
     }
 
-    const isModalCall = !tweetData;
+    const isModalCall = dataFromModal;
     
     //  initialize a ref, and adjust the dimensions (width and height) of the clicked tweet's 
     //     media (photo and video)
@@ -77,14 +69,14 @@ const TweetPage = ({dataFromModal}) => {
             // this enables the page to identify comments which are direct comments to the tweet
                 // but not a comment of a comment.
             // 2. Get <Comments /> component (which renders each comment) and assign it to loadComments;
-        const loadComments = comments.length > 0 ? comments.filter(comment => comment.ref_to === id).map(comment => <Comments key={comment.id} isModal={isModalCall} theComment={comment} allComments={comments} />) : [];
+        const loadComments = ( tweetData || dataFromModal) && comments.length > 0  ? comments.filter(comment => comment.ref_to === id).map(comment => <Comments key={comment.id} isModal={isModalCall} theComment={comment} allComments={comments} />) : [];
 
     // when the media (photo / video) of a tweet is clicked
         // a modal will open with the tweet's data
     const openModal = () => {
         // pass the opened tweet's data (including comments) to the Modal Context
             // this ensures the tweet's modal get's access to the opened tweet's data
-        onOpenModal({modalState: true, activeStatusID: id, tweetComments: comments, theTweetData: tweetData});
+        onOpenModal({modalState: true, activeStatusID: id, modalImg: media_url});
     }
 
     // URL to tweet's modal component
@@ -109,26 +101,26 @@ const TweetPage = ({dataFromModal}) => {
             </div>}
 
             {/* TWEET AUTHOR INFO AND CAPTION */}
-            <div className={`${tweetData ? styles['author-details'] : mediaStyle['author-details']} row`}>
-                <div className={tweetData ? styles['author-photo'] : mediaStyle['author-photo']}>
-                    <div style={{backgroundImage: `url(${Posty}`}} className={tweetData ? styles['comm-pic'] : mediaStyle['comm-pic']} />
+            <div className={`${!dataFromModal ? styles['author-details'] : mediaStyle['author-details']} row`}>
+                <div className={!dataFromModal ? styles['author-photo'] : mediaStyle['author-photo']}>
+                    <div style={{backgroundImage: `url(${dp}`}} className={!dataFromModal ? styles['comm-pic'] : mediaStyle['comm-pic']} />
                 </div>
-                <div className={tweetData ? styles['author-names'] : mediaStyle['author-names']}>
+                <div className={!dataFromModal ? styles['author-names'] : mediaStyle['author-names']}>
                     <p>{full_name}</p>
-                    <p className={tweetData ? styles['author-username'] : mediaStyle['author-username']}>@<span>{username}</span></p>
+                    <p className={!dataFromModal ? styles['author-username'] : mediaStyle['author-username']}>@<span>{username}</span></p>
                 </div>
-                <div className={tweetData ? styles['tweet-menu'] : mediaStyle['tweet-menu']}>
+                <div className={!dataFromModal ? styles['tweet-menu'] : mediaStyle['tweet-menu']}>
                     <ion-icon style={{color: '#71767b'}} name="ellipsis-horizontal"></ion-icon>
                 </div>
             </div>
-            <div className={tweetData ? styles['tweet-caption'] : mediaStyle['tweet-caption']}>
-                <p className={tweetData ? styles['tweet-text'] : mediaStyle['tweet-text']}>{tweet_caption}</p>
+            <div className={!dataFromModal ? styles['tweet-caption'] : mediaStyle['tweet-caption']}>
+                <p className={!dataFromModal ? styles['tweet-text'] : mediaStyle['tweet-text']}>{tweet_caption}</p>
             </div>
             {/* TWEET AUTHOR INFO AND CAPTION */}
 
 
             {/* TWEET MEDIA IF AVAILABLE */}
-            {media && tweetData &&
+            {media && !dataFromModal &&
                 // this is the media section of the visited tweet
                     // when clicked, we send tweet data to the modal context
                     // then, the tweet modal opens
@@ -141,7 +133,7 @@ const TweetPage = ({dataFromModal}) => {
             {/* TWEET MEDIA IF AVAILABLE */}
 
             {/* TWEET AUTHOR LOCATION AND DATE */}
-            <div className={tweetData ? styles['tweet-info'] : mediaStyle['tweet-info']}>
+            <div className={!dataFromModal ? styles['tweet-info'] : mediaStyle['tweet-info']}>
                 <p className='center'>
                     <span>{timePosted}</span>
                     <span className={styles['hold-dot']}>
@@ -181,15 +173,15 @@ const TweetPage = ({dataFromModal}) => {
 
             {/* ADD COMMENT TO TWEET */}
             <div className={`${styles['add-tweet-comment']} row`}>
-                <div className={tweetData ? styles['composer-pic'] : mediaStyle['composer-pic']}>
-                    <div className={`${tweetData? styles['add-com-pic'] : mediaStyle['add-com-pic']} center`} style={{backgroundImage: `url(${Boogie})`}}></div>
+                <div className={!dataFromModal ? styles['composer-pic'] : mediaStyle['composer-pic']}>
+                    <div className={`${!dataFromModal? styles['add-com-pic'] : mediaStyle['add-com-pic']} center`} style={{backgroundImage: `url(${Boogie})`}}></div>
                 </div>
-                <div className={tweetData ? styles['composer-form'] : mediaStyle['composer-form']}>
+                <div className={!dataFromModal ? styles['composer-form'] : mediaStyle['composer-form']}>
                     <form className='center'>
                         <input type='text' className={styles['comm-input']} placeholder='Tweet your reply!' />
                     </form>
                 </div>
-                <div className={tweetData ? styles['reply-btn'] : mediaStyle['reply-btn']}>
+                <div className={!dataFromModal ? styles['reply-btn'] : mediaStyle['reply-btn']}>
                     <button type='button' className={`${styles['submit-btn']} center pending-button`}>Reply</button>
                 </div>
             </div>

@@ -1,23 +1,23 @@
-import { useEffect, useState, useRef } from "react";
-import { useLoaderData, useNavigation } from "react-router";
+import React, { useState, useRef, useContext, useCallback } from "react";
+import { useNavigation } from "react-router";
 import styles from "./Home.module.css";
 import dp from "../Assets/dp.jpg";
 import Tweet from "../Components/Tweets/Tweet";
 
+import { TweetsContext } from "../Context/TweetsProvider";
+
 const Home = () => {
-
-  useEffect(() => {
-
-  }, []);
-
+  console.log('Home page');
+  const fetchTweetsCtx = useContext(TweetsContext);
+  const { all_tweets, postTweet:newTweet } = fetchTweetsCtx;
 
   const [validPost, setValidPost] = useState(false);
   const [tweetMedia, setTweetMedia] = useState(null);
+  const [posting, setPosting] = useState(false);
   const tweetText = useRef();
 
   const theNav = useNavigation();
   const loading = theNav.state === "loading";
-  const getAllTweets = useLoaderData();
 
   const validClass = validPost ? "valid-button" : "pending-button";
 
@@ -43,6 +43,8 @@ const Home = () => {
 
   const postTweet = async () => {
     if(!validPost) return;
+    if(posting) return;
+    setPosting(true);
     // get author id
     const authorID = localStorage.getItem('profile');
 
@@ -61,13 +63,18 @@ const Home = () => {
     tweetValidForm.append('authID', authorID);
     console.log(Object.fromEntries(tweetValidForm));
 
-    const postTweet = await fetch(`${process.env.REACT_APP_ENDPOINT}/post-tweet`, {
+   fetch(`${process.env.REACT_APP_ENDPOINT}/post-tweet`, {
       method: 'POST',
       body: tweetValidForm
-    });
-    const postRes = await postTweet.json();
-    console.log(postRes);
-
+    }).then(res => res.json()).then(res =>  {
+      console.log(res);
+      const { addedTweet } = res;
+      newTweet(addedTweet);
+      setValidPost(false);
+      setTweetMedia(null);
+      tweetText.current.value = '';
+      setPosting(false);
+    })
   }
   return (
     <>
@@ -125,8 +132,8 @@ const Home = () => {
                 </div>
                 <div className={styles["centered-space"]}></div>
                 <div className={styles["post-tweet-btn"]}>
-                  <button type="button" onClick={postTweet} className={`${validClass} center`}>
-                    Tweet
+                  <button type="button" style={posting ? {width: '120px', cursor: 'not-allowed'} : {}} onClick={postTweet} className={`${validClass} center`}>
+                    {posting ? 'Tweeting 📱' : 'Tweet'}
                   </button>
                 </div>
               </div>
@@ -134,7 +141,7 @@ const Home = () => {
           </div>
 
           {/* render all tweets */}
-          {getAllTweets.map((tweet, i) => (
+          {all_tweets && all_tweets.map((tweet, i) => (
             <Tweet key={i} tweetData={tweet} />
           ))}
           {/* render all tweets */}
@@ -145,4 +152,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default React.memo(Home);

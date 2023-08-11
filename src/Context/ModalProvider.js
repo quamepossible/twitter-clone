@@ -9,8 +9,7 @@ export const ModalCtx = createContext({
 const initModalState = {
   modalState: false,
   activeStatusID: "",
-  tweetComments: [],
-  theTweetData: {},
+  modalImg: '',
 };
 
 const modalReducer = (_, action) => {

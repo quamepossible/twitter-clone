@@ -1,5 +1,4 @@
 
-
 const fetchAllTweets = async () => {
   try {
     const tweetsRes = await fetch(`${process.env.REACT_APP_ENDPOINT}/all-tweets`);

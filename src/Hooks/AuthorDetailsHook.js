@@ -1,16 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useContext } from "react";
+import { TweetsContext } from "../Context/TweetsProvider";
 
 const useAuthorDetailsHook = (id) => {
-  const [details, setDetails] = useState({});
+  const { eachProfile } = useContext(TweetsContext);
   
   useEffect(() => {
+    console.log('run');
     fetch(`${process.env.REACT_APP_ENDPOINT}/author-details/${id}`)
       .then((res) => res.json())
       .then((res) => {
-        setDetails(res);
+        eachProfile(res)
       });
-  }, [id]);
-  return details;
+  }, [id, eachProfile]);
 };
 
 export default useAuthorDetailsHook;
