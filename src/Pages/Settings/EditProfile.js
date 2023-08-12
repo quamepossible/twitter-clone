@@ -11,7 +11,7 @@ const EditProfile = ({ closeModal, bio }) => {
   const [selectedImg, setSelectedImg] = useState(null);
   const [virtualForm, setVirtualForm] = useState(null);
   const [savingData, setSavingData] = useState(false);
-  const { updateProfile, updateAllTweets } = useContext(TweetsContext)
+  const { updateProfile, loggin, updateAllTweets } = useContext(TweetsContext)
 
   // get username from local storage
   const loggedUser = localStorage.getItem("profile");
@@ -107,6 +107,7 @@ const EditProfile = ({ closeModal, bio }) => {
             }
           }
           updateProfile(response);
+          loggin(response);
           updateAllTweets(profileObj);
           handleCloseModal();
         }

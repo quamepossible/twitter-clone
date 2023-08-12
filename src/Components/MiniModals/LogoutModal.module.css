@@ -1,0 +1,40 @@
+.hold-log {
+  width: 310px;
+  height: 70px;
+  box-shadow: 0 0 6px rgba(183, 183, 183, 0.721);
+  border-radius: 10px;
+  background-color: black;
+  position: absolute;
+  bottom: 120px;
+  z-index: 60;
+}
+
+
+.out-form {
+  width: 100%;
+}
+
+.logout-btn {
+  font-family: "Work Sans", sans-serif;
+  height: 40px;
+  width: 100%;
+  border: none;
+  color: white;
+  background-color: black;
+  transition: 0.2s;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: left;
+  padding-left: 15px;
+}
+
+.logout-btn:hover {
+  background-color: rgb(27, 27, 27);
+}
+
+.icon {
+  color: rgb(74, 74, 74);
+  font-size: 40px;
+  top: 105%
+}

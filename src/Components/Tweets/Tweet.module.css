@@ -16,8 +16,10 @@
   
   .author-dp {
     width: 45px;
+    height: 45px;
+    background-position: center;
+    background-size: cover;
     border-radius: 50%;
-    display: block;
     margin: auto;
     margin-top: 5px;
   }

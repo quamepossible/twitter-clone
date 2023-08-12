@@ -23,7 +23,7 @@ const Tweet = ({ tweetData }) => {
     <NavLink to={tweetPath} className={`${styles["tweets"]} row`}>
       {/* AUTHOR DP */}
       <div className={styles["author-photo"]}>
-        <img alt="author-dp" src={profile_pic} className={styles["author-dp"]} />
+        <div style={{backgroundImage: `url(${profile_pic})`}} className={styles["author-dp"]} />
       </div>
       {/* AUTHOR DP */}
 

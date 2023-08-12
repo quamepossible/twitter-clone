@@ -11,7 +11,8 @@ const Home = () => {
   const userIsAuthenticated = localStorage.getItem('user');
 
   const fetchTweetsCtx = useContext(TweetsContext);
-  const { all_tweets, postTweet:newTweet } = fetchTweetsCtx;
+  const { all_tweets, postTweet:newTweet, loggedInProfile } = fetchTweetsCtx;
+  const { profile_pic } = loggedInProfile;
 
   const [validPost, setValidPost] = useState(false);
   const [tweetMedia, setTweetMedia] = useState(null);
@@ -93,7 +94,7 @@ const Home = () => {
             <div className={styles["tweeter-dp"]}>
               <div
                 className={styles["tweet-pic"]}
-                style={{ backgroundImage: `url(${dp})` }}
+                style={{ backgroundImage: `url(${profile_pic})` }}
               ></div>
             </div>
             <div className={styles["tweet-section"]}>

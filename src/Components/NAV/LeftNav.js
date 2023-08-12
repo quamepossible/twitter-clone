@@ -1,14 +1,17 @@
 import React, { useState, useRef, useContext, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import { NavLink } from "react-router-dom";
 import { TweetsContext } from '../../Context/TweetsProvider';
-import useAuthorDetailsHook from '../../Hooks/AuthorDetailsHook';
+import LogoutModal from '../MiniModals/LogoutModal';
 import styles from "./LeftNav.module.css";
 import homeIcon from "../../Assets/home.png";
-import Boogie from "../../Assets/media/boogie.jpg"
 
 const LeftNav = () => {
+  const [openLogout, setOpenLogout] = useState(false);
   console.log('Left Nav');
-  // const { loggedInProfile } = useContext(TweetsContext);
+  const { loggedInProfile } = useContext(TweetsContext);
+  const { full_name, username, profile_pic } = loggedInProfile;
+
   const userIsAuthenticated = localStorage.getItem('user');
   const profile = localStorage.getItem('profile');
 
@@ -16,34 +19,11 @@ const LeftNav = () => {
     const fullClassName = [styles['nav-link'], styles['active']];
     return isActive ? `${fullClassName.join(' ')} row` : `${styles["nav-link"]} row`
   }
-
   const navData = [["Home", "cottage", "/"], ["Explore", "search", "/explore"], ["Notifications", "notifications", "/notifications"], ["Messages", "mail", "/messages"], ["Lists", "description", "/lists"], ["Bookmarks", "bookmark", "/bookmarks"], ["Communities", "group", "/communities"], ["Verified", "verified", "/verified-choose"], ["Profile", "person", "/profile"], ["More", "more_horiz", "/more"]];
- 
-  const authVal = useRef();
-  const logoutHandler = useCallback((e) => {
-    e.preventDefault();
-    const authToken = authVal.current.value;
-    const logoutForm = new FormData();
-    logoutForm.append('token', authToken);
-    // console.log(authToken);
-    fetch(`${process.env.REACT_APP_ENDPOINT}/logout`, {
-      method: 'POST',
-      body: JSON.stringify(Object.fromEntries(logoutForm)),
-      headers: {
-        'Content-Type':'application/json'
-      }
-    }).then(res => res.json()).then(res => {
-      localStorage.clear();
-      const { status } = res; 
-      if(status === 'signed out') {
-        window.location.reload();
-      }
-      if(status === 'failed') {
-        console.log('sign out failed');        
-      }
-      console.log(res);
-    });
-  },[])
+
+  const logoutHandlerClicked = () => {
+    setOpenLogout(prev => !prev);
+  }
  
   return (
     <>
@@ -71,21 +51,15 @@ const LeftNav = () => {
         {!userIsAuthenticated && <NavLink to="/auth?action=login" className={`${styles['login-field']}`}>
           <p className={`${styles['login-text']} center`}>Login</p>
         </NavLink>}
-        {
-          userIsAuthenticated && 
-          <form onSubmit={logoutHandler}>
-            <input type='text' style={{display:'none'}} ref={authVal} defaultValue={userIsAuthenticated} />
-            <button type='submit'>Logout</button>
-          </form>
-        }
 
-        {userIsAuthenticated && <div className={`${styles['login']} row`}>
+        {openLogout && <LogoutModal user={username} />}
+        {userIsAuthenticated && <div className={`${styles['login']} row`} onClick={logoutHandlerClicked}>
           <div className={styles['hold-user-pic']}>
-            <div className={`${styles['user-pic']} center`} style={{backgroundImage: `url(${Boogie})`}}></div>
+            <div className={`${styles['user-pic']} center`} style={{backgroundImage: `url(${profile_pic})`}}></div>
           </div>
           <div className={styles['user-details']}>
-            {/* <p className={styles['user-fullname']}>{loggedInProfile.full_name}</p>
-            <p className={styles['user-name']}>@{loggedInProfile.username}</p> */}
+            <p className={styles['user-fullname']}>{full_name}</p>
+            <p className={styles['user-name']}>@{username}</p>
           </div>
           <div className={styles['log-menu']}>
             <ion-icon style={{color: ''}} name="ellipsis-horizontal"></ion-icon>
