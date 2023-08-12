@@ -1,8 +1,6 @@
 import { useState, useContext } from "react";
 import { TweetsContext } from "../../Context/TweetsProvider";
 
-
-
 import coverImg from "../../Assets/cover.jpeg";
 import styles from "./EditProfile.module.css";
 
@@ -90,7 +88,7 @@ const EditProfile = ({ closeModal, bio }) => {
     fullForm.append('username', loggedUser);
     console.log(Object.fromEntries(fullForm));
     // send fullForm to backend
-    fetch("http://localhost:3005/edit-profile", {
+    fetch(`${process.env.REACT_APP_ENDPOINT}/edit-profile`, {
       method: "POST",
       body: fullForm,
     })
