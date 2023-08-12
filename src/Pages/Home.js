@@ -8,6 +8,8 @@ import { TweetsContext } from "../Context/TweetsProvider";
 
 const Home = () => {
   console.log('Home page');
+  const userIsAuthenticated = localStorage.getItem('user');
+
   const fetchTweetsCtx = useContext(TweetsContext);
   const { all_tweets, postTweet:newTweet } = fetchTweetsCtx;
 
@@ -83,7 +85,11 @@ const Home = () => {
       {!loading && (
         <div className={styles["content-section"]}>
           <div className={styles["top-home"]}></div>
-          <div className={`${styles["post-tweet"]} row`}>
+          {!userIsAuthenticated && <div className={styles["log-tweet"]}>
+            <button className={`${styles['unauth-btn']} center`}>Login to post tweets</button>
+          </div>}
+
+          {userIsAuthenticated && <div className={`${styles["post-tweet"]} row`}>
             <div className={styles["tweeter-dp"]}>
               <div
                 className={styles["tweet-pic"]}
@@ -138,7 +144,7 @@ const Home = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </div>}
 
           {/* render all tweets */}
           {all_tweets && all_tweets.map((tweet, i) => (
