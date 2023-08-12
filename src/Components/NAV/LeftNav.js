@@ -25,17 +25,24 @@ const LeftNav = () => {
     const authToken = authVal.current.value;
     const logoutForm = new FormData();
     logoutForm.append('token', authToken);
-    fetch('http://localhost:3005/logout', {
+    // console.log(authToken);
+    fetch(`${process.env.REACT_APP_ENDPOINT}/logout`, {
       method: 'POST',
       body: JSON.stringify(Object.fromEntries(logoutForm)),
       headers: {
         'Content-Type':'application/json'
       }
-    }).then(res => res.text()).then(res => {
+    }).then(res => res.json()).then(res => {
       localStorage.clear();
+      const { status } = res; 
+      if(status === 'signed out') {
+        window.location.reload();
+      }
+      if(status === 'failed') {
+        console.log('sign out failed');        
+      }
       console.log(res);
     });
-
   },[])
  
   return (

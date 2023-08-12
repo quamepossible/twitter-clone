@@ -111,7 +111,6 @@ const EditProfile = ({ closeModal, bio }) => {
           updateProfile(response);
           updateAllTweets(profileObj);
           handleCloseModal();
-
         }
       });
   };

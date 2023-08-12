@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext, useCallback } from "react";
+import React, { useState, useRef, useContext } from "react";
 import { useNavigation } from "react-router";
 import styles from "./Home.module.css";
 import dp from "../Assets/dp.jpg";

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { createPortal } from "react-dom";
 import { useSearchParams, Link } from "react-router-dom";
 
@@ -11,6 +11,8 @@ import styles from "./Login.module.css";
 import logo from "../../Assets/home.png";
 
 const LoginModal = () => {
+  const [loginError, setLoginError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const { loggin } = useContext(TweetsContext);
 
   const [searchParams] = useSearchParams();
@@ -19,6 +21,7 @@ const LoginModal = () => {
 
   if (currentAction !== "login" && currentAction !== "signup")
     window.location.href = "/";
+
   const nextActionLink = signIn ? "signup" : "login";
 
   const formik = useFormik({
@@ -34,30 +37,45 @@ const LoginModal = () => {
         .required("Required"),
     }),
     onSubmit: async (values) => {
+      setLoginError(true);
+      setErrorMessage("checking details, please wait...");
       console.log(JSON.stringify(values));
-      const requestRes = await fetch(`http://localhost:3005/${currentAction}`, {
-        method: "POST",
-        body: JSON.stringify(values),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const requestRes = await fetch(
+        `${process.env.REACT_APP_ENDPOINT}/${currentAction}`,
+        {
+          method: "POST",
+          body: JSON.stringify(values),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       const theResponse = await requestRes.json();
-      if(theResponse?.userToken) { // sign-up / log-in authenticated successfully
+      if (theResponse?.userToken) {
+        // sign-up / log-in authenticated successfully
         const { userToken, profile } = theResponse;
         const { username } = profile;
         // set up localstorage for token
-        localStorage.setItem('user', userToken);
-        localStorage.setItem('profile', username);
-        loggin(profile)
+        localStorage.setItem("user", userToken);
+        localStorage.setItem("profile", username);
+        loggin(profile);
+        window.location.href = "/";
         console.log(profile);
       }
-      if(theResponse?.status){ // failed sign-up / log-in
+      if (theResponse?.status) {
+        // failed sign-up / log-in
         const { status } = theResponse;
+        setLoginError(true);
+        setErrorMessage(status);
         console.log(status);
       }
     },
   });
+
+  const resetErrors = () => {
+    setLoginError(false);
+    setErrorMessage('');
+  };
   return (
     <>
       <div className={styles["login-modal"]}>
@@ -87,6 +105,9 @@ const LoginModal = () => {
               className={styles["login-form"]}
               onSubmit={formik.handleSubmit}
             >
+              {loginError && (
+                <div className={styles["log-error"]}>{errorMessage}</div>
+              )}
               <input
                 type="email"
                 name="email"
@@ -94,6 +115,9 @@ const LoginModal = () => {
                 placeholder="Email"
                 {...formik.getFieldProps("email")}
               />
+              {formik.touched.email && formik.errors.email ? (
+                <div className={styles["error-sec"]}>{formik.errors.email}</div>
+              ) : null}
               <input
                 type="password"
                 name="password"
@@ -101,17 +125,24 @@ const LoginModal = () => {
                 placeholder="Password"
                 {...formik.getFieldProps("password")}
               />
+              {formik.touched.password && formik.errors.password ? (
+                <div className={styles["error-sec"]}>
+                  {formik.errors.password}
+                </div>
+              ) : null}
               <button type="submit" className={styles["sign-btn"]}>
-                {signIn ? 'Sign In' : 'Create account'}
+                {signIn ? "Sign In" : "Create account"}
               </button>
-              {signIn && <button type="button" className={styles["forgot-btn"]}>
-                Forgot password?
-              </button>}
+              {signIn && (
+                <button type="button" className={styles["forgot-btn"]}>
+                  Forgot password?
+                </button>
+              )}
             </form>
             <div className={styles["sign-up"]}>
               <p>
                 {!signIn ? "Already" : "Don't"} have an account?{" "}
-                <Link to={`?action=${nextActionLink}`}>
+                <Link to={`?action=${nextActionLink}`} onClick={resetErrors}>
                   {signIn ? "Sign up" : "Login"}
                 </Link>
               </p>

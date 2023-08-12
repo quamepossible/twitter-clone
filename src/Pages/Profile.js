@@ -7,7 +7,6 @@ import useAuthorDetailsHook from '../Hooks/AuthorDetailsHook';
 import EditProfile from './Settings/EditProfile';
 import styles from './Profile.module.css';
 import coverImg from '../Assets/cover.jpeg';
-import dpImg from '../Assets/Logo_of_Twitter.png';
 
 const Profile = () => {
     console.log('profile');
@@ -31,7 +30,7 @@ const Profile = () => {
         }
     }, [isLoggedInDetails, profileUsername])
 
-    const dp = profileData.profile_pic || dpImg;
+    const dp = profileData.profile_pic;
 
     const openEditModal = () => {
         setModalIsOpen(true);

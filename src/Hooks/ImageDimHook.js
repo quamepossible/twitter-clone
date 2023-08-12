@@ -27,7 +27,7 @@ const useImgDimHook = (mediaRef, defaultMedia) => {
     
         }
         imageDimensionSet()
-    }, [])
+    }, [mediaRef, defaultMedia])
 }
 
 export default useImgDimHook;

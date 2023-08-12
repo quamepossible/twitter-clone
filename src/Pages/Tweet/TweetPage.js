@@ -1,5 +1,5 @@
 import { useRef, useContext } from 'react';
-import { Link, useLoaderData, useNavigation, useParams } from 'react-router-dom';
+import { Link, useNavigation, useParams } from 'react-router-dom';
 
 import { ModalCtx } from '../../Context/ModalProvider';
 import { TweetsContext } from '../../Context/TweetsProvider';

@@ -62,13 +62,13 @@ const dataReducer = (state, action) => {
 const TweetsProvider = (props) => {
   const [initAppData, dispatchData] = useReducer(dataReducer, appData);
 
-  const postNewTweet = useCallback((tweet) => {
+  const postNewTweet = (tweet) => {
     dispatchData({ type: "NEW-TWEET", data: tweet });
-  }, []);
+  };
 
-  const fetchAllTweets = useCallback((tweets) => {
+  const fetchAllTweets = (tweets) => {
     dispatchData({ type: "FETCH-TWEETS", data: tweets });
-  }, []);
+  };
 
   const updateAuthorDetails = useCallback((author) => {
     dispatchData({ type: "UPDATE-AUTHOR", data: author });

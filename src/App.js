@@ -99,8 +99,8 @@ function App() {
             {
               index: true,
               element: <TweetPage />,
-              errorElement: <TweetPageError />,
-              loader: singleTweetLoader,
+              // errorElement: <TweetPageError />,
+              // loader: singleTweetLoader,
             },
             {
               path: "photo/:num",
