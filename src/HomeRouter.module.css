@@ -1,6 +1,13 @@
 .centered {
-    width: 600px;
-    /* height: 1300px; */
-    height: auto;
-    border: 1px solid var(--bordergray);
-  }
+  width: 600px;
+  /* height: 1300px; */
+  height: auto;
+  border: 1px solid var(--bordergray);
+}
+
+.error-fetch{
+  margin-top: 30px;
+  /* background-color: red; */
+  text-align: center;
+  font-size: 21px;
+}

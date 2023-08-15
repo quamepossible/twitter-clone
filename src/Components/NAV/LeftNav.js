@@ -4,9 +4,9 @@ import { NavLink } from "react-router-dom";
 import { TweetsContext } from '../../Context/TweetsProvider';
 import LogoutModal from '../MiniModals/LogoutModal';
 import styles from "./LeftNav.module.css";
-import homeIcon from "../../Assets/home.png";
+import homeIcon from "../../Assets/new-logo.jpg";
 
-const LeftNav = () => {
+const LeftNav = ({loadLog}) => {
   const [openLogout, setOpenLogout] = useState(false);
   console.log('Left Nav');
   const { loggedInProfile } = useContext(TweetsContext);
@@ -53,7 +53,7 @@ const LeftNav = () => {
         </NavLink>}
 
         {openLogout && <LogoutModal user={username} />}
-        {userIsAuthenticated && <div className={`${styles['login']} row`} onClick={logoutHandlerClicked}>
+        {loadLog && userIsAuthenticated && <div className={`${styles['login']} row`} onClick={logoutHandlerClicked}>
           <div className={styles['hold-user-pic']}>
             <div className={`${styles['user-pic']} center`} style={{backgroundImage: `url(${profile_pic})`}}></div>
           </div>
